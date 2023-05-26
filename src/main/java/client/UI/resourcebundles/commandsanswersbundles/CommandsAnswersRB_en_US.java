@@ -1,5 +1,6 @@
 package client.UI.resourcebundles.commandsanswersbundles;
 
+
 import java.util.ListResourceBundle;
 
 public class CommandsAnswersRB_en_US extends ListResourceBundle {
@@ -25,7 +26,7 @@ public class CommandsAnswersRB_en_US extends ListResourceBundle {
                 {"updateCommandNotExecuted", "Selected object belongs to another user!"},
                 {"countGreaterThanFrontManExecuted", "Music bands with front men, that higher than %s: %s"},
                 {"countGreaterThanFrontManNotExecuted", "Entered height in wrong format!(Expected: float, not null)"},
-                {"groupCountingVyCoordinatesExecuted", "\nGroup of Coordinates: %s\nCount of elements: %s\n"},
+                {"groupCountingByCoordinatesExecuted", "\nGroup of Coordinates: %s\nCount of elements: %s\n"},
                 {"collectionIsEmpty", "Collection is empty!"}
         };
         return content;

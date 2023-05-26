@@ -25,7 +25,7 @@ public class CommandsAnswersRB_ru_RU extends ListResourceBundle {
                 {"updateCommandNotExecuted", "Выбранный объект принадлежит другому пользователю!"},
                 {"countGreaterThanFrontManExecuted", "Музыкальных групп с солистом, выше чем %s: %s"},
                 {"countGreaterThanFrontManNotExecuted", "Введенный рост в неверном формате!(Ожидалось: float, не null)"},
-                {"groupCountingVyCoordinatesExecuted", "\nГруппа координат: %s\nКоличество элементов: %s\n"},
+                {"groupCountingByCoordinatesExecuted", "\nГруппа координат: %s\nКоличество элементов: %s\n"},
                 {"collectionIsEmpty", "Коллекция пустая!"}
         };
         return content;

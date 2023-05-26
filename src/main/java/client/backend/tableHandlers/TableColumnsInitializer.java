@@ -5,6 +5,7 @@ import javafx.beans.property.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.controlsfx.control.table.TableFilter;
 import shared.core.models.Country;
 import shared.core.models.MusicBand;
 

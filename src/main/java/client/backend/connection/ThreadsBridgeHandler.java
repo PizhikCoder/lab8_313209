@@ -1,5 +1,6 @@
 package client.backend.connection;
 
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import shared.connection.interfaces.IRequest;
 import shared.connection.requests.AuthorizationRequest;
 import shared.connection.requests.CommandRequest;
@@ -24,9 +25,9 @@ public class ThreadsBridgeHandler {
             ValidationRequest request = (ValidationRequest) new ObjectInputStream(pipedInputStream).readObject();
             return (boolean)request.getData();
         } catch (IOException e) {
-            printer.print("Connection could not be established!");
+            printer.print(RuntimeOutputs.CONNECTION_COULD_NOT_BE_ESTABLISHED.toString());
         } catch (ClassNotFoundException e) {
-            printer.print("Validation request could not be parsed!");
+            printer.print(RuntimeOutputs.CONNECTION_UNKNOWN_CLASS_RECEIVED.toString());
         }
         return false;
     }
@@ -42,9 +43,9 @@ public class ThreadsBridgeHandler {
             CommandRequest request = (CommandRequest) new ObjectInputStream(pipedInputStream).readObject();
             return (boolean)request.getData();
         } catch (IOException e) {
-            printer.print("Connection could not be established!");
+            printer.print(RuntimeOutputs.CONNECTION_COULD_NOT_BE_ESTABLISHED.toString());
         } catch (ClassNotFoundException e) {
-            printer.print("Validation request could not be parsed!");
+            printer.print(RuntimeOutputs.CONNECTION_UNKNOWN_CLASS_RECEIVED.toString());
         }
         return false;
     }
@@ -60,9 +61,9 @@ public class ThreadsBridgeHandler {
             AuthorizationRequest request = (AuthorizationRequest) new ObjectInputStream(pipedInputStream).readObject();
             return request;
         } catch (IOException e) {
-            printer.print("Connection could not be established!");
+            printer.print(RuntimeOutputs.CONNECTION_COULD_NOT_BE_ESTABLISHED.toString());
         } catch (ClassNotFoundException e) {
-            printer.print("Validation request could not be parsed!");
+            printer.print(RuntimeOutputs.CONNECTION_UNKNOWN_CLASS_RECEIVED.toString());
         }
         return new AuthorizationRequest(null,null, BASE_ID_VALUE, false);
     }

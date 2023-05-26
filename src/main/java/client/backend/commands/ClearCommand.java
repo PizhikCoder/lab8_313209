@@ -16,7 +16,7 @@ public class ClearCommand extends Command{
     }
 
     @Override
-    public boolean execute(String... args) throws RecursionException, FileAccessException, CommandParamsException, FileDoesNotExistException, ArgumentLimitsException {
+    public boolean execute(String... args)  {
         invoker.getConnection().getSender().send(new CommandRequest(new CommandDTO("ClearCommand"), null));
         if(ThreadsBridgeHandler.waitCommandExecuted(invoker.getPipedInputStream(), invoker.getPrinter())){
             invoker.getPrinter().print(CommandsAnswers.CLEAR_COMMAND_EXECUTED.toString());

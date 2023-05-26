@@ -22,7 +22,7 @@ public class AddCommandAdapter extends Command {
     private final int MUSIC_BAND_CREATING_AND_UPDATING_FORM_WIDTH = 400;
 
     @Override
-    public boolean execute(String... args) throws RecursionException, FileAccessException, CommandParamsException, FileDoesNotExistException, ArgumentLimitsException {
+    public boolean execute(String... args) throws CommandParamsException {
         try {
             MusicBandCreatingAndUpdatingFormController musicBandCreatingAndUpdatingFormController = initCreatingForm();
             Map<DataField, Object> data = musicBandCreatingAndUpdatingFormController.getData();

@@ -28,7 +28,7 @@ public enum ColumnNames {
 
     @Override
     public String toString() {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.MusicBandFieldsRB", MainFormController.getCurrentLocale().get().getLocale());
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.musicbandfieldsbundles.MusicBandFieldsRB", MainFormController.getCurrentLocale().get().getLocale());
         return resourceBundle.getString(bundleObjectName);
     }
 }

@@ -3,6 +3,7 @@ package client.UI.Controllers;
 import client.MainApplication;
 import client.UI.resourcebundles.enums.AvailableLocales;
 import client.UI.resourcebundles.enums.MainFormElements;
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.commands.*;
 import client.backend.core.Invoker;
 import client.backend.core.MusicBandFieldsValidators;
@@ -167,7 +168,7 @@ public class MainFormController {
             Invoker.getInstance().invokeCommand(command);
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load music band creator form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         } finally {
             button.setDisable(false);
@@ -185,7 +186,7 @@ public class MainFormController {
             prepareAndInvokeRemoveByIdCommand(value);
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load additional form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         } finally {
             button.setDisable(false);
@@ -224,7 +225,7 @@ public class MainFormController {
             stage.show();
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load filter creator form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         }
     }
@@ -251,7 +252,7 @@ public class MainFormController {
             }
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load additional form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         } finally {
             button.setDisable(false);
@@ -290,7 +291,7 @@ public class MainFormController {
             Invoker.getInstance().invokeCommand(command, value);
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load additional form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         } finally {
             button.setDisable(false);
@@ -318,7 +319,7 @@ public class MainFormController {
             prepareAndInvokeAddIfMinCommand(value);
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load additional form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         } finally {
             button.setDisable(false);
@@ -348,7 +349,7 @@ public class MainFormController {
             }
         } catch (IOException ioException) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load music band creating form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         }
     }
@@ -375,7 +376,7 @@ public class MainFormController {
             MainApplication.getPrimaryStage().setScene(scene);
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load authorization form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         }
     }
@@ -395,7 +396,7 @@ public class MainFormController {
                     Invoker.getInstance().invokeCommand(command);
                 } catch (IOException exception) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Can not load music band updater form!");
+                    alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
                     alert.show();
                 }
             } else {
@@ -421,7 +422,7 @@ public class MainFormController {
         }
         catch (IOException ioException){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load language changing form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         }
     }

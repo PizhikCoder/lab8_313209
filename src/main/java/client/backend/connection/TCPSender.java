@@ -1,5 +1,6 @@
 package client.backend.connection;
 
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.connection.interfaces.IMessageSender;
 import shared.connection.interfaces.IRequest;
 import shared.interfaces.IPrinter;
@@ -34,7 +35,7 @@ public class TCPSender implements IMessageSender {
             outputStream.flush();
         }
         catch (IOException exception){
-            printer.print("Can not send request!");
+            printer.print(RuntimeOutputs.TCP_SENDER_CAN_NOT_SEND_REQUEST.toString());
         }
     }
 }

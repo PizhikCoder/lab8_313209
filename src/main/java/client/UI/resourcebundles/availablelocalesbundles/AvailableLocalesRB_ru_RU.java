@@ -1,4 +1,4 @@
-package client.UI.resourcebundles;
+package client.UI.resourcebundles.availablelocalesbundles;
 
 import java.util.ListResourceBundle;
 
@@ -7,7 +7,10 @@ public class AvailableLocalesRB_ru_RU extends ListResourceBundle {
     protected Object[][] getContents() {
         Object[][] contents = {
                 {"russian", "Русский"},
-                {"english", "Английский"}
+                {"english", "Английский"},
+                {"estonian", "Эстонский"},
+                {"croatian", "Хорватский"},
+                {"spanish", "Испанский"}
         };
         return contents;
     }

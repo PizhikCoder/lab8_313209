@@ -1,6 +1,7 @@
 package client;
 
 import client.UI.Controllers.AuthorizationFormController;
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.connection.ClientConnection;
 import client.backend.connection.ServerListenerThread;
 import client.backend.connection.interfaces.IClientConnection;
@@ -18,6 +19,7 @@ import shared.interfaces.IPrinter;
 
 import java.io.IOException;
 import java.io.PipedOutputStream;
+import java.time.ZoneId;
 
 public class MainApplication extends Application {
     public final static int MAIN_SCENE_WIDTH = 800;
@@ -58,7 +60,7 @@ public class MainApplication extends Application {
         catch (ConnectionException connectionException){
             Platform.runLater(()->{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Connection error");
+                alert.setHeaderText(RuntimeOutputs.CONNECTION_COULD_NOT_BE_ESTABLISHED.toString());
                 alert.setContentText(connectionException.getMessage());
                 alert.show();
             });
@@ -66,8 +68,7 @@ public class MainApplication extends Application {
         catch (IOException ioException){
             Platform.runLater(()->{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Can not run component");
-                alert.setContentText("Can not initialize component...");
+                alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
                 alert.show();
             });
         }

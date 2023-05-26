@@ -1,5 +1,6 @@
 package server;
 
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import server.connection.ConnectionHandler;
 import server.database.DatabaseHandler;
 import server.database.PostgresDataBase;
@@ -74,7 +75,7 @@ public class Main {
             logger = Logger.getLogger(Main.class.getName());
         } catch (IOException exception) {
             System.err.println(exception.getMessage());
-            System.out.println("Can not load logger's configuration");
+            System.out.println(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             System.exit(1);
         }
     }

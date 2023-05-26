@@ -1,5 +1,6 @@
 package client.backend.core;
 
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.commands.Command;
 import client.backend.core.Exceptions.UnknownCommandException;
 import shared.interfaces.IPrinter;
@@ -35,7 +36,7 @@ public class FileListener {
             }
         }
         catch (IOException ex){
-            printer.print("Something went wrong with script file...");
+            printer.print(RuntimeOutputs.FILE_LISTENER_PROBLEM_WITH_SCRIPT_FILE.toString());
         }
     }
 
@@ -72,7 +73,7 @@ public class FileListener {
         try {
             return reader.readLine();
         } catch (IOException e) {
-            printer.print("Can not read from file!");
+            printer.print(RuntimeOutputs.FILE_LISTENER_CAN_NOT_READ_FILE.toString());
             return "";
         }
     }

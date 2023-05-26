@@ -1,4 +1,4 @@
-package client.UI.resourcebundles;
+package client.UI.resourcebundles.musicbandfieldsbundles;
 
 
 import java.util.ListResourceBundle;

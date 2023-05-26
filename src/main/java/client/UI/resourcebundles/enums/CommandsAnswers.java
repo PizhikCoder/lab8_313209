@@ -24,7 +24,7 @@ public enum CommandsAnswers {
     EXECUTE_SCRIPT_CAN_NOT_FOUND_FILE("executeScriptCanNotFoundFile"),
     COUNT_GREATER_THAN_FRONT_MAN_EXECUTED("countGreaterThanFrontManExecuted"),
     COUNT_GREATER_THAN_FRONT_MAN_NOT_EXECUTED("countGreaterThanFrontManNotExecuted"),
-    GROUP_COUNTING_BY_COORDINATES_EXECUTED("groupCountingVyCoordinatesExecuted"),
+    GROUP_COUNTING_BY_COORDINATES_EXECUTED("groupCountingByCoordinatesExecuted"),
     COLLECTION_IS_EMPTY("collectionIsEmpty");
 
     private final String bundleObjectName;

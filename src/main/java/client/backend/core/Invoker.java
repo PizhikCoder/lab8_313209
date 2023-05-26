@@ -52,25 +52,7 @@ public class Invoker {
                 }
             }
         }
-        catch (RecursionException exception){
-            printer.print("Recursion exception.");
-            printer.print(exception.getMessage());
-        }
-
         catch (CommandParamsException exception){
-            printer.print("Params exception.");
-            printer.print(exception.getMessage());
-        }
-        catch (FileDoesNotExistException exception){
-            printer.print("File exception.");
-            printer.print(exception.getMessage());
-        }
-        catch (ArgumentLimitsException exception){
-            printer.print("Argument limits exception.");
-            printer.print(exception.getMessage());
-        }
-        catch (FileAccessException exception){
-            printer.print("Command exception.");
             printer.print(exception.getMessage());
         }
         return false;

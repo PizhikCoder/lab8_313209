@@ -3,6 +3,7 @@ package client.UI.Controllers;
 import client.MainApplication;
 import client.UI.resourcebundles.enums.AuthorizationFormElements;
 import client.UI.resourcebundles.enums.MainFormElements;
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.commands.SignUpCommand;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -168,7 +169,7 @@ public class AuthorizationFormController {
         }
         catch (IOException ioException){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load language changing form!");
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         }
     }

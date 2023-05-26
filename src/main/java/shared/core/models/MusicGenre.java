@@ -19,7 +19,7 @@ public enum MusicGenre implements Serializable {
 
     @Override
     public String toString() {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.MusicGenreRB", MainFormController.getCurrentLocale().get().getLocale());
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.musicgenrebundles.MusicGenreRB", MainFormController.getCurrentLocale().get().getLocale());
         return resourceBundle.getString(bundleObjectName);
     }
 }

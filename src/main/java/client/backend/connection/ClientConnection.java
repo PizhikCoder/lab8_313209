@@ -1,5 +1,6 @@
 package client.backend.connection;
 
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.connection.interfaces.*;
 import client.backend.core.*;
 import shared.connection.interfaces.IRequest;
@@ -52,7 +53,7 @@ public class ClientConnection implements IClientConnection {
              return true;
         }
         catch (UnknownHostException exception){
-            invoker.getPrinter().print("Unknown host name!");
+            invoker.getPrinter().print(RuntimeOutputs.CONNECTION_UNKNOWN_HOST_NAME.toString());
         }
         catch (IOException exception){
             throw new ConnectionException();
@@ -73,10 +74,10 @@ public class ClientConnection implements IClientConnection {
             return request;
         }
         catch (ClassNotFoundException exception){
-            invoker.getPrinter().print("Unknown class has been received!");
+            invoker.getPrinter().print(RuntimeOutputs.CONNECTION_UNKNOWN_CLASS_RECEIVED.toString());
         }
         catch (IOException exception){
-            invoker.getPrinter().print("Connection could not be established!");
+            invoker.getPrinter().print(RuntimeOutputs.CONNECTION_COULD_NOT_BE_ESTABLISHED.toString());
             tryReconnect();
         }
         return new PingRequest();
@@ -87,24 +88,25 @@ public class ClientConnection implements IClientConnection {
      */
     private void tryReconnect() {
         long startTime = System.currentTimeMillis();
-        invoker.getPrinter().print("Reconnecting...");
+        invoker.getPrinter().print(RuntimeOutputs.CONNECTION_RECONNECTING.toString());
         try {
             socket.close();
         }
         catch (IOException ex){
-            System.out.println("Can not close channel with server!" );
+            invoker.getPrinter().print(RuntimeOutputs.CONNECTION_CAN_NOT_CLOSE_CHANNEL.toString());
         }
         while ((System.currentTimeMillis() - startTime)/1000 < RECONNECT_TIME_LIMIT){
             try {
                 Thread.sleep(THREAD_SLEEP_TIME);
                 if(connect(invoker)){
+                    invoker.getPrinter().print(RuntimeOutputs.CONNECTION_RECONNECTED.toString());
                     return;
                 }
             }
             catch (ConnectionException | InterruptedException exception){
             }
         }
-        invoker.getPrinter().print("Reconnection failed!");
+        invoker.getPrinter().print(RuntimeOutputs.CONNECTION_RECONNECTION_FAILED.toString());
         System.exit(1);
 
     }

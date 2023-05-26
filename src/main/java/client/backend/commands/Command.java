@@ -12,5 +12,5 @@ public abstract class Command {
      * @throws CommandParamsException
      * @throws FileDoesNotExistException
      */
-    public abstract boolean execute(String ... args) throws RecursionException, FileAccessException, CommandParamsException, FileDoesNotExistException, ArgumentLimitsException;
+    public abstract boolean execute(String ... args) throws CommandParamsException;
 }

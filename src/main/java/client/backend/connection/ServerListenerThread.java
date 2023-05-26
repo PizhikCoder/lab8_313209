@@ -54,7 +54,7 @@ public class ServerListenerThread extends Thread{
             try{
                 IRequest response = connection.getResponse();
                 if (response instanceof MessageRequest){
-                    handleMessageRequest(response);
+//                    handleMessageRequest(response);
                 }
                 else if(response instanceof ValidationRequest){
                     if (response.getData() == null) continue;

@@ -1,8 +1,8 @@
-package client.UI.resourcebundles;
+package client.UI.resourcebundles.musicgenrebundles;
 
 import java.util.ListResourceBundle;
 
-public class MusicGenreRB_en_US extends ListResourceBundle {
+public class MusicGenreRB_est_EST extends ListResourceBundle {
     @Override
     protected Object[][] getContents() {
         Object[][] contents = {
