@@ -63,12 +63,24 @@
                   </ScrollPane>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Button fx:id="createFilterButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onFilterCreatingButtonPressed" text="Create Filter" />
-                  <Button fx:id="removeFiltersButton" mnemonicParsing="false" onAction="#onFilterRemovingButtonPressed" text="Remove Filters" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="createFilterButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onFilterCreatingButtonPressed" text="Create Filter" />
+                        <Button fx:id="removeFiltersButton" mnemonicParsing="false" onAction="#onFilterRemovingButtonPressed" text="Remove Filters" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="visualizeButton" onAction="#onVisualizationButtonPressed" mnemonicParsing="false" text="Visualize" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                </children>
-            </HBox>
+            </GridPane>
          </children>
          <GridPane.margin>
             <Insets bottom="10.0" />

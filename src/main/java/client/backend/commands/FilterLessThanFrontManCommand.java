@@ -8,6 +8,7 @@ import client.backend.tableHandlers.TableViewHandler;
 import client.backend.tableHandlers.predicatefactory.AbstractPredicateFactory;
 import client.backend.tableHandlers.predicatefactory.FilterSigns;
 import client.backend.tableHandlers.predicatefactory.PredicateFactory;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -18,21 +19,21 @@ import shared.core.models.MusicBand;
 import java.io.IOException;
 import java.util.function.Predicate;
 
-public class FilterLessThanFrontManCommand extends Command{
+public class FilterLessThanFrontManCommand extends Command {
     private final HBox filtersHBox;
 
     private final int HEIGHT_INDEX = 0;
 
     private final int EXPECTED_ARGUMENTS_COUNT = 1;
 
-    public FilterLessThanFrontManCommand(HBox filtersHBox){
+    public FilterLessThanFrontManCommand(HBox filtersHBox) {
         this.filtersHBox = filtersHBox;
     }
 
     @Override
     public boolean execute(String... args) throws CommandParamsException {
         try {
-            if (args.length != EXPECTED_ARGUMENTS_COUNT){
+            if (args.length != EXPECTED_ARGUMENTS_COUNT) {
                 throw new CommandParamsException(args.length, EXPECTED_ARGUMENTS_COUNT);
             }
             if (MusicBandFieldsValidators.personHeightCheck(args[HEIGHT_INDEX])) {
@@ -49,9 +50,11 @@ public class FilterLessThanFrontManCommand extends Command{
                 return true;
             }
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Can not find filter fxml form!");
-            alert.setContentText(e.getMessage());
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Can not find filter fxml form!");
+                alert.setContentText(e.getMessage());
+            });
         }
         return false;
     }

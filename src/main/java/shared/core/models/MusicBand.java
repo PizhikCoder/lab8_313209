@@ -1,11 +1,14 @@
 package shared.core.models;
 
 import server.core.Invoker;
+import shared.commands.enums.DataField;
 import shared.core.exceptions.FieldValueIsNotCorrectException;
 import server.core.validators.ModelsValidator;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Model's class-constructor.
@@ -145,6 +148,18 @@ public class MusicBand implements Serializable {
         else {
             throw new FieldValueIsNotCorrectException();
         }
+    }
+
+    public Map<DataField, Object> toHashMap(){
+        Map<DataField, Object> data = new HashMap<>();
+        data.put(DataField.MODEL_ID, id);
+        data.put(DataField.OWNER_ID, ownerId);
+        data.put(DataField.FRONTMAN, frontMan);
+        data.put(DataField.GENRE, genre);
+        data.put(DataField.COORDINATES, coordinates);
+        data.put(DataField.NAME, name);
+        data.put(DataField.NUMBER_OF_PARTICIPANTS, numberOfParticipants);
+        return data;
     }
 
     @Override

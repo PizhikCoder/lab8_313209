@@ -30,7 +30,7 @@ public class FilterCreatorFormController {
     @FXML
     protected GridPane currentPane;
     @FXML
-    private ComboBox<ColumnNames>  columnsForFilteringComboBox;
+    private ComboBox<ColumnNames> columnsForFilteringComboBox;
     @FXML
     private ComboBox<FilterSigns> signsCombobox;
     @FXML
@@ -47,8 +47,15 @@ public class FilterCreatorFormController {
     private Button cancelButton;
 
     private DatePicker datePicker;
+
+    private final int DATE_PICKER_ROW = 2;
+
+    private final int DATE_PICKER_COLUMN = 1;
+
     private Stage currentStage;
+
     private HBox mainFiltersHBox;
+
     private TableView tableView;
 
     @FXML
@@ -57,12 +64,12 @@ public class FilterCreatorFormController {
         tableView = MainFormController.getMainFormController().getTableView();
         updateLocale();
         initColumns();
-        columnsForFilteringComboBox.valueProperty().addListener(change->columnsForFilteringComboBoxChanged());
+        columnsForFilteringComboBox.valueProperty().addListener(change -> columnsForFilteringComboBoxChanged());
         initSigns();
-        MainFormController.getCurrentLocale().addListener(change->updateLocale());
+        MainFormController.getCurrentLocale().addListener(change -> updateLocale());
     }
 
-    private void updateLocale(){
+    private void updateLocale() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.filecreatorbundles.FilterCreatorFormRB", MainFormController.getCurrentLocale().get().getLocale());
 
         filterColumnLabel.setText(resourceBundle.getString(FilterCreatorFormElements.FILTER_COLUMN_LABEL.toString()));
@@ -76,15 +83,15 @@ public class FilterCreatorFormController {
         cancelButton.setText(resourceBundle.getString(FilterCreatorFormElements.CANCEL_BUTTON.toString()));
     }
 
-    private void columnsForFilteringComboBoxChanged(){
+    private void columnsForFilteringComboBoxChanged() {
         ColumnNames selectedColumn = columnsForFilteringComboBox.getValue();
-        if (selectedColumn == ColumnNames.CREATION_DATE_COLUMN){
+        if (selectedColumn == ColumnNames.CREATION_DATE_COLUMN) {
             datePicker = new DatePicker();
             currentPane.getChildren().remove(filteringValueTextField);
-            currentPane.add(datePicker, 1, 2);
+            currentPane.add(datePicker, DATE_PICKER_COLUMN, DATE_PICKER_ROW);
             return;
         }
-        if (datePicker != null){
+        if (datePicker != null) {
             currentPane.getChildren().remove(datePicker);
             currentPane.add(filteringValueTextField, 1, 2);
             datePicker = null;
@@ -124,7 +131,7 @@ public class FilterCreatorFormController {
                 .filter(x -> ((FixedNameTableColumn) x).getFixedName() == columnsForFilteringComboBox.getValue())
                 .findAny().get();
 
-        if (fixedNameTableColumn.getFixedName() == ColumnNames.CREATION_DATE_COLUMN && datePicker.getValue() != null){
+        if (fixedNameTableColumn.getFixedName() == ColumnNames.CREATION_DATE_COLUMN && datePicker.getValue() != null) {
             filteringValueTextField.setText(datePicker.getValue().toString());
         }
 

@@ -10,6 +10,9 @@ import shared.interfaces.IPrinter;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Invoker {
     private final IPrinter printer;
@@ -20,11 +23,18 @@ public class Invoker {
 
     private final PipedInputStream pipedInputStream;
 
+    private final ExecutorService threadsPool;
+
     private Invoker(IPrinter printer, PipedOutputStream pipedOutputStream, IClientConnection connection) throws IOException {
         this.printer = printer;
         this.pipedInputStream = new PipedInputStream();
         this.pipedInputStream.connect(pipedOutputStream);
         this.connection = connection;
+        threadsPool = Executors.newCachedThreadPool(runnable->{
+            final Thread thread = new Thread(runnable);
+            thread.setDaemon(true);
+            return thread;
+        });
     }
 
     public static Invoker create(IPrinter printer, PipedOutputStream pipedOutputStream, IClientConnection connection) throws IOException {
@@ -44,7 +54,8 @@ public class Invoker {
      * @param command command's object.
      * @param arguments command's arguments.
      */
-    public boolean invokeCommand(Command command, String ... arguments){
+    public Future<Boolean> invokeCommand(Command command, String ... arguments){
+        return threadsPool.submit(()->{
         try{
             if (command != null){
                 if (!connection.isConnected() && (ClientInfo.isAuthorized() || command instanceof INoAuthCommand)){
@@ -56,6 +67,7 @@ public class Invoker {
             printer.print(exception.getMessage());
         }
         return false;
+        });
     }
 
 

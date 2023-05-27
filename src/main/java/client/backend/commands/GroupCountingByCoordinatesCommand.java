@@ -2,6 +2,7 @@ package client.backend.commands;
 
 import client.UI.resourcebundles.enums.CommandsAnswers;
 import client.backend.core.Invoker;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
@@ -33,13 +34,17 @@ public class GroupCountingByCoordinatesCommand extends Command{
             output += String.format(CommandsAnswers.GROUP_COUNTING_BY_COORDINATES_EXECUTED.toString(),
                     coordinates, count);
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        TextArea textArea = new TextArea(output);
-        textArea.setWrapText(true);
-        textArea.setEditable(false);
-        alert.getDialogPane().setContent(textArea);
-        alert.setResizable(true);
-        alert.show();
+
+        String finalOutput = output;
+        Platform.runLater(()->{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            TextArea textArea = new TextArea(finalOutput);
+            textArea.setWrapText(true);
+            textArea.setEditable(false);
+            alert.getDialogPane().setContent(textArea);
+            alert.setResizable(true);
+            alert.show();
+        });
         return true;
     }
 }

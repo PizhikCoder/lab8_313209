@@ -22,6 +22,7 @@ import shared.interfaces.IPrinter;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
 public class AuthorizationFormController {
     private int SHOW_PASSWORD_TOOLTIP_DELAY = 1000;
@@ -90,11 +91,11 @@ public class AuthorizationFormController {
     }
 
     @FXML
-    protected void onSignInButtonPressed(ActionEvent event) {
+    protected void onSignInButtonPressed(ActionEvent event) throws ExecutionException, InterruptedException {
         Button button = (Button)event.getTarget();
         button.setDisable(true);
         Command command = new SignInCommand(Invoker.getInstance(), logInTextField.getText(), passwordTextField.getText());
-        if (Invoker.getInstance().invokeCommand(command)) {
+        if (Invoker.getInstance().invokeCommand(command).get()) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("DataGridForm.fxml"));
                 Parent parent = fxmlLoader.load();
@@ -110,11 +111,11 @@ public class AuthorizationFormController {
     }
 
     @FXML
-    protected void onSignUpButtonPressed(ActionEvent actionEvent){
+    protected void onSignUpButtonPressed(ActionEvent actionEvent) throws ExecutionException, InterruptedException {
         Button button = (Button)actionEvent.getTarget();
         button.setDisable(true);
         Command command = new SignUpCommand(Invoker.getInstance(), logInTextField.getText(), passwordTextField.getText());
-        if (Invoker.getInstance().invokeCommand(command)) {
+        if (Invoker.getInstance().invokeCommand(command).get()) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("DataGridForm.fxml"));
                 Parent parent = fxmlLoader.load();

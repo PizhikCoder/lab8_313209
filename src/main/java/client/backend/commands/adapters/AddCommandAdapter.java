@@ -4,6 +4,7 @@ import client.UI.Controllers.MusicBandCreatingAndUpdatingFormController;
 import client.backend.commands.AddCommand;
 import client.backend.commands.Command;
 import client.backend.core.Invoker;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import shared.core.exceptions.*;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class AddCommandAdapter extends Command {
 
@@ -28,12 +30,14 @@ public class AddCommandAdapter extends Command {
             Map<DataField, Object> data = musicBandCreatingAndUpdatingFormController.getData();
             if (data == null) return false;
             Command command = new AddCommand(data, Invoker.getInstance());
-            return Invoker.getInstance().invokeCommand(command);
+            return Invoker.getInstance().invokeCommand(command).get();
         } catch (IOException exception) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Can not load music band creator form!");
-            alert.show();
-        }
+            Platform.runLater(()->{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Can not load music band creator form!");
+                alert.show();
+            });
+        } catch (ExecutionException | InterruptedException e) {}
         return false;
     }
 

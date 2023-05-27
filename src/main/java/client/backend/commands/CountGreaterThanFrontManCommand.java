@@ -3,6 +3,7 @@ package client.backend.commands;
 import client.UI.resourcebundles.enums.CommandsAnswers;
 import client.backend.core.Invoker;
 import client.backend.core.MusicBandFieldsValidators;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import org.controlsfx.control.Notifications;
@@ -40,9 +41,11 @@ public class CountGreaterThanFrontManCommand extends Command{
             long count = Arrays.stream(collection)
                     .filter(x->x.getFrontMan().getHeight()!=null
                             && x.getFrontMan().getHeight()>height).count();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText(String.format(CommandsAnswers.COUNT_GREATER_THAN_FRONT_MAN_EXECUTED.toString(), height, count));
-            alert.show();
+            Platform.runLater(()->{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText(String.format(CommandsAnswers.COUNT_GREATER_THAN_FRONT_MAN_EXECUTED.toString(), height, count));
+                alert.show();
+            });
             return true;
         }
         Invoker.getInstance().getPrinter().print(CommandsAnswers.COUNT_GREATER_THAN_FRONT_MAN_NOT_EXECUTED.toString());

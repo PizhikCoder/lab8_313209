@@ -101,6 +101,10 @@ public class MainFormController {
 
     private static SimpleObjectProperty<AvailableLocales> currentLocale = new SimpleObjectProperty<>(AvailableLocales.ENGLISH);
 
+    private final int VISUALIZATION_FORM_WIDTH = 800;
+
+    private final int VISUALIZATION_FORM_HEIGHT = 600;
+
     private final int FILTER_CREATING_FROM_WIDTH = 400;
 
     private final int FILTER_CREATING_FORM_HEIGHT = 300;
@@ -332,6 +336,33 @@ public class MainFormController {
         Invoker.getInstance().invokeCommand(command);
     }
 
+    @FXML
+    protected void onVisualizationButtonPressed(ActionEvent actionEvent){
+        Button button = (Button) actionEvent.getSource();
+        Stage stage = new Stage();
+        try{
+            button.setDisable(true);
+            FXMLLoader fxmlLoader = new FXMLLoader(VisualizerFormController.class.getResource("VisualizerForm.fxml"));
+            Parent parent = fxmlLoader.load();
+            Scene scene = new Scene(parent, VISUALIZATION_FORM_WIDTH, VISUALIZATION_FORM_HEIGHT);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.showAndWait();
+            stage.close();
+            ((VisualizerFormController)fxmlLoader.getController()).clearResources();
+            System.gc();
+
+        }
+        catch (IOException exception) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
+            alert.show();
+        }
+        finally {
+            button.setDisable(false);
+        }
+    }
+
     private void prepareAndInvokeAddIfMinCommand(String value) {
         try {
             if (MusicBandFieldsValidators.bandIdValidate(value)) {
@@ -483,5 +514,9 @@ public class MainFormController {
 
     public static void setCurrentLocale(AvailableLocales availableLocales){
         currentLocale.set(availableLocales);
+    }
+
+    public ObservableList<MusicBand> getModelsCollection(){
+        return modelsCollection;
     }
 }

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class ModelsValidator {
 
-    private static final int Y_LIMIT = 742;
+    private static final int Y_LIMIT = 3000;
 
     private static final Logger logger = Logger.getLogger(ModelsValidator.class.getName());
 

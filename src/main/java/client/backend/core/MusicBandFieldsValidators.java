@@ -5,6 +5,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class MusicBandFieldsValidators {
+    private static final int PERSON_HEIGHT_LIMIT = 240;
+    private static final int COORDINATE_Y_LIMIT = 3000;
+    private static final int COORDINATE_X_LIMIT = 3000;
     public static boolean bandNameValidate(TextField textField, MusicBandCreatingAndUpdatingFormController controller) {
         String value = textField.getText();
         if (value.isBlank()) {
@@ -47,6 +50,25 @@ public class MusicBandFieldsValidators {
         }
         setWrongValueTextFieldStyle(textField);
         controller.setCoordinateYValidity(false);
+        return false;
+    }
+
+
+    public static boolean coordinateXValidate(TextField textField) {
+        if (!textField.getText().isBlank() && coordinateXCheck(textField.getText())){
+            setAcceptedValueTextFieldStyle(textField);
+            return true;
+        }
+        setWrongValueTextFieldStyle(textField);
+        return false;
+    }
+
+    public static boolean coordinateYValidate(TextField textField) {
+        if (!textField.getText().isBlank() && coordinateYCheck(textField.getText())){
+            setAcceptedValueTextFieldStyle(textField);
+            return true;
+        }
+        setWrongValueTextFieldStyle(textField);
         return false;
     }
 
@@ -137,7 +159,7 @@ public class MusicBandFieldsValidators {
     private static boolean coordinateXCheck(String x) {
         try {
             Integer.parseInt(x);
-            return true;
+            return Integer.parseInt(x) <= COORDINATE_X_LIMIT && Integer.parseInt(x) >=0 ;
         } catch (NumberFormatException numberFormatException) {
             return false;
         }
@@ -146,7 +168,7 @@ public class MusicBandFieldsValidators {
     private static boolean coordinateYCheck(String y) {
         y = y.replace(',', '.');
         try {
-            return Double.parseDouble(y)<=742;
+            return Double.parseDouble(y)<=COORDINATE_Y_LIMIT && Double.parseDouble(y) >= 0;
         } catch (NumberFormatException numberFormatException) {
             return false;
         }
@@ -163,7 +185,7 @@ public class MusicBandFieldsValidators {
     public static boolean personHeightCheck(String height) {
         height = height.replace(',', '.');
         try {
-            return  height.isEmpty() || Float.parseFloat(height) > 0;
+            return  height.isEmpty() || Float.parseFloat(height) > 0 && Float.parseFloat(height) <= PERSON_HEIGHT_LIMIT;
         } catch (NumberFormatException numberFormatException) {
             return false;
         }

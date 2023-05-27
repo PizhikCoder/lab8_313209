@@ -30,7 +30,7 @@ public class Coordinates implements Serializable {
     }
 
     public void setY(double y) {
-        if (y<=742 || Invoker.getIsDataLoading()){
+        if (y<=3000 || Invoker.getIsDataLoading()){
             this.y = y;
         }
         else {

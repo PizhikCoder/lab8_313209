@@ -47,7 +47,7 @@ public class Person implements Serializable {
     }
 
     public void setHeight(Float height) {
-        if (height == null || height > 0 || Invoker.getIsDataLoading()){
+        if (height == null || (height > 0 && height <= 240) || Invoker.getIsDataLoading()){
             this.height = height;
         }
         else {

@@ -2,10 +2,10 @@ package client.backend.visualizationlogic.computers;
 
 
 import client.backend.visualizationlogic.entities.StraightLineEquation;
+import client.backend.visualizationlogic.exceptions.UnsolvableCollisionCaseException;
 import javafx.geometry.Point2D;
 
 public class CirclesComputer {
-    private final int CIRCLE_POLYGON_POINTS_COUNT = 100;
 
     public boolean checkCollision(Point2D center1, Point2D center2, float radius1, float radius2) {
         double distance = center1.distance(center2);
@@ -13,10 +13,7 @@ public class CirclesComputer {
             return false;
         }
         if (radius1 + radius2 > distance) {
-            if (distance < Math.max(radius1, radius2) && distance + Math.min(radius1, radius2) < Math.max(radius1, radius2)) {
-                return false;
-            }
-            if (Math.max(radius1, radius2) > Math.min(radius1, radius2) + distance) {
+            if (Math.max(radius1, radius2) > distance){
                 return false;
             }
             return true;
@@ -31,21 +28,18 @@ public class CirclesComputer {
         return new StraightLineEquation(a, b, c);
     }
 
-    public Point2D[] calculateCirclePolygon(Point2D center, float radius) {
-        Point2D[] points = new Point2D[CIRCLE_POLYGON_POINTS_COUNT];
-        double length = 2 * Math.PI * radius;
-        double partLength = length / 100;
-        double area = partLength * 0.5 * radius;
-        double alpha = (area * 360) / (Math.PI * radius * radius);
-        double step = Math.sin(alpha);
+    public Point2D[] calculateCirclePolygon(Point2D center, float radius, int pointsCount) {
+        Point2D[] points = new Point2D[pointsCount];
+        double alphaStep = (360d * Math.PI) / (pointsCount * 180);
+        double alpha = 0;
 
         int counter = 0;
-        double x = 0;
 
-        while (counter<CIRCLE_POLYGON_POINTS_COUNT){
-            double y = Math.sqrt(radius*radius - Math.pow(x - center.getX(), 2)) + center.getY();
+        while (counter < pointsCount) {
+            double x = radius * Math.sin(alpha) + center.getX();
+            double y = radius * Math.cos(alpha) + center.getY();
             points[counter] = new Point2D(x, y);
-            x+=step;
+            alpha += alphaStep;
             counter++;
         }
         return points;
