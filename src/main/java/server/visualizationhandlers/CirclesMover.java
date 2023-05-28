@@ -45,7 +45,7 @@ public class CirclesMover {
 
     private final int VELOCITY2_INDEX = 1;
 
-    private final int MOVES_PER_SECOND = 10;
+    private final int MOVES_PER_SECOND = 30;
 
     private final int SECOND = 1000;
 
@@ -91,6 +91,7 @@ public class CirclesMover {
                 try {
                     startMoving(musicBand);
                 } catch (InterruptedException e) {
+                    logger.log(Level.SEVERE, "Exception in fork!", e);
                 }
             }
         };
@@ -98,7 +99,7 @@ public class CirclesMover {
 
     private void move(MusicBand musicBand, double[] velocity){
         Coordinates coordinates = new Coordinates(musicBand.getCoordinates().getX(), musicBand.getCoordinates().getY());
-        if (coordinates.getX() + Math.round(velocity[SPEED_VECTOR_X_INDEX]) <= 0 || coordinates.getY() + (int)velocity[SPEED_VECTOR_Y_INDEX]<0){
+        if (coordinates.getX() + Math.round(velocity[SPEED_VECTOR_X_INDEX]) <= 0 || coordinates.getY() + velocity[SPEED_VECTOR_Y_INDEX]<0){
             return;
         }
         if (ModelsValidator.idExist(musicBand.getId()) && invoker.getDatabaseHandler().updateModel(musicBand.toHashMap(), musicBand.getId())) {
@@ -145,11 +146,14 @@ public class CirclesMover {
     private double[] computeSpeed(Point2D center1, Point2D center2){
         double dx = center1.getX() - center2.getX();
         double dy = center1.getY() - center2.getY();
-        double multiplier = 1/Math.min(dx, dy);
-
+        double multiplier = 1/(Math.min(dx, dy) == 0 ? 1 : Math.min(dx, dy));
         double xVelocity = dx * multiplier * X_SPEED_MULTIPLIER;
-        double yVelicity = dy * multiplier * Y_SPEED_MULTIPLIER;
+        double yVelocity = dy * multiplier * Y_SPEED_MULTIPLIER;
+        if (yVelocity == xVelocity && xVelocity == 0){
+            yVelocity = 1;
+            xVelocity = 1;
+        }
 
-        return new double[]{xVelocity, yVelicity};
+        return new double[]{xVelocity, yVelocity};
     }
 }

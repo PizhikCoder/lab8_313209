@@ -4,6 +4,7 @@ import org.postgresql.util.PSQLException;
 import server.database.interfaces.IDatabase;
 
 import java.sql.*;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +19,8 @@ public class PostgresDataBase implements IDatabase {
 
     private final int DATABASE_WAITING_TIME = 3;
 
+    private final int SEMAPHORE_PLACES_COUNT = 2;
+
     private final String hostName;
 
     private final String pass;
@@ -26,10 +29,13 @@ public class PostgresDataBase implements IDatabase {
 
     private Connection connection;
 
+    private final Semaphore semaphore;
+
     public PostgresDataBase(String hostName, String pass, String url) {
         this.hostName = hostName;
         this.pass = pass;
         this.url = url;
+        this.semaphore = new Semaphore(SEMAPHORE_PLACES_COUNT);
     }
 
     /**
@@ -67,13 +73,22 @@ public class PostgresDataBase implements IDatabase {
             System.exit(1);
         }
         try {
-            return preparedStatement.executeQuery();
+            semaphore.acquire();
+            if(preparedStatement.execute()){
+                return preparedStatement.getResultSet();
+            }
+            return null;
         } catch (PSQLException exception) {
             logger.log(Level.INFO, "Query without results.");
             return null;
         } catch (SQLException e) {
             logger.log(Level.WARNING, "Can not send query to database!", e);
             return null;
+        } catch (InterruptedException e) {
+            return null;
+        }
+        finally {
+            semaphore.release();
         }
     }
 

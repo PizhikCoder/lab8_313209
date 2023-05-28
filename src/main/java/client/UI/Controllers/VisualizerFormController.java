@@ -8,8 +8,8 @@ import client.backend.visualizationlogic.entities.MusicBandPolygon;
 import client.backend.visualizationlogic.computers.CirclesComputer;
 import client.backend.visualizationlogic.computers.PolygonsFacade;
 import client.backend.visualizationlogic.entities.StraightLineEquation;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
@@ -20,15 +20,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
+import javafx.util.Duration;
 import shared.commands.enums.DataField;
 import shared.core.ClientInfo;
 import shared.core.models.Coordinates;
 import shared.core.models.MusicBand;
 import shared.core.models.Person;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
 
 public class VisualizerFormController {
     @FXML
@@ -52,17 +51,27 @@ public class VisualizerFormController {
     @FXML
     private Pane canvasPane;
 
+    @FXML
+    private Label canvasXLabel;
+
+    @FXML
+    private Label canvasYLabel;
+
+
     private final float HEIGHT_SLIDER_DEFAULT_VALUE = 1;
 
     private static Canvas canvas = new Canvas();
+
+    private static Timeline frameTimer;
 
     private final static double SCALE_COMPUTING_RADIUS_MULTIPLIER = 0.67;
 
     private static final Affine defaultTransform = canvas.getGraphicsContext2D().getTransform();
 
-    private ObservableList<MusicBand> collection;
+    private ArrayList<MusicBand> collection;
 
     private final int CIRCLE_POLYGON_POINTS_COUNT = 100;
+
 
     private static final int CANVAS_DEFAULT_WIDTH = 580;
 
@@ -72,9 +81,14 @@ public class VisualizerFormController {
 
     private final float DEFAULT_RADIUS_VALUE = 100;
 
+    private final int FRAMES_PER_SECOND = 60;
+
+    private final int SECOND = 1000;
+
     private ArrayList<MusicBandPolygon> musicBandPolygons;
 
     private MusicBand selectedMusicBand;
+
 
 
     static {
@@ -84,11 +98,17 @@ public class VisualizerFormController {
     @FXML
     public void initialize() {
         musicBandPolygons = new ArrayList<>();
-        collection = MainFormController.getMainFormController().getModelsCollection();
-        collection.addListener((ListChangeListener<MusicBand>) change -> drawModels());
         canvas.setOnMouseClicked(this::onCanvasMouseClicked);
+        canvas.setOnMouseMoved(this::onCanvasMouseMoved);
         canvasPane.getChildren().add(canvas);
-        drawModels();
+        frameTimer = new Timeline(new KeyFrame(Duration.millis(0)), new KeyFrame(
+                Duration.millis(SECOND / FRAMES_PER_SECOND),
+                actionEvent -> {
+                    collection = new ArrayList<>(MainFormController.getMainFormController().getModelsCollection());
+                    this.drawModels();
+                }
+        ));
+        frameTimer.playFromStart();
     }
 
     private static void configureCanvas() {
@@ -111,6 +131,7 @@ public class VisualizerFormController {
         for (MusicBandPolygon polygon : musicBandPolygons) {
             drawModel(polygon);
         }
+        frameTimer.playFromStart();
     }
 
     private void computeCanvasScale() {
@@ -145,7 +166,7 @@ public class VisualizerFormController {
     }
 
     private void drawModel(MusicBandPolygon polygon) {
-        PolygonsFacade polygonsFacade = new PolygonsFacade();
+        PolygonsFacade polygonsFacade = PolygonsFacade.getInstance();
         Affine affine = canvas.getGraphicsContext2D().getTransform();
         for (MusicBandPolygon polygonToCompare : musicBandPolygons) {
             if (polygonToCompare == polygon) continue;
@@ -165,6 +186,7 @@ public class VisualizerFormController {
 
     public void clearResources() {
         canvasPane.getChildren().clear();
+        frameTimer.stop();
     }
 
     private void configureGC(int ownerId) {
@@ -248,5 +270,13 @@ public class VisualizerFormController {
                 -fx-border-radius: 50;
                 -fx-border-color: brown
                 """);
+    }
+
+    private void onCanvasMouseMoved(MouseEvent mouseEvent){
+        Affine affine = canvas.getGraphicsContext2D().getTransform();
+        Integer newX = (int)Math.round(mouseEvent.getX() / affine.getMxx());
+        Integer newY = (int)Math.round(mouseEvent.getY() / affine.getMyy());
+        canvasXLabel.setText(newX.toString());
+        canvasYLabel.setText(newY.toString());
     }
 }

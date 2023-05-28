@@ -244,7 +244,7 @@ public class DatabaseHandler implements IDataLoader, IDataSaver, IDatabaseHandle
                 updateGenre(data, genre_id);
                 updateCoordinates(data, coordinates_id);
 
-                dbConnection.sendQuery(RequestsEnum.UPDATE_MODEL.createStatement(data.get(DataField.NAME), data.get(DataField.NUMBER_OF_PARTICIPANTS)));
+                dbConnection.sendQuery(RequestsEnum.UPDATE_MODEL.createStatement(data.get(DataField.NAME), data.get(DataField.NUMBER_OF_PARTICIPANTS), modelId));
                 logger.log(Level.INFO, String.format("Model ID: %s updated.", modelId));
                 return true;
             }

@@ -1,5 +1,6 @@
 package server.visualizationhandlers;
 
+import javafx.animation.Timeline;
 import server.core.Invoker;
 import shared.core.models.MusicBand;
 
@@ -22,11 +23,10 @@ public class CirclesProcessor {
 
     private final ForkJoinPool forkJoinPool;
 
-
     private CirclesProcessor(Invoker invoker){
         this.invoker = invoker;
         executorService = Executors.newSingleThreadExecutor();
-        this.forkJoinPool = new ForkJoinPool(3);
+        this.forkJoinPool = new ForkJoinPool();
     }
 
     public synchronized static CirclesProcessor getInstance(Invoker invoker){
@@ -38,6 +38,7 @@ public class CirclesProcessor {
 
     public void process(MusicBand musicBand){
         executorService.submit(()->{
+
             CirclesMover circlesMover = new CirclesMover(invoker.getModelsManager(), invoker);
             forkJoinPool.invoke(new RecursiveAction() {
                 @Override

@@ -59,11 +59,9 @@ public class TableViewHandler {
     }
 
     public void updateElement(MusicBand newMusicBand){
-        Platform.runLater(()->{
-            if (modelsCollection.removeIf(oldMusicBand -> oldMusicBand.getId() == newMusicBand.getId())){
-                modelsCollection.add(newMusicBand);
-            }
-        });
+        if (modelsCollection.removeIf(oldMusicBand -> oldMusicBand.getId() == newMusicBand.getId())){
+            modelsCollection.add(newMusicBand);
+        }
     }
 
     public void removeElement(MusicBand musicBand){

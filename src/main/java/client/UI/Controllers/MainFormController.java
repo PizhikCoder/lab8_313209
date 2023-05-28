@@ -54,8 +54,8 @@ public class MainFormController {
 
     @FXML
     private TableView tableView;
-    @FXML
-    private static ObservableList<MusicBand> modelsCollection = FXCollections.observableArrayList();
+
+    private volatile static ObservableList<MusicBand> modelsCollection = FXCollections.observableArrayList();
 
     @FXML
     private Button removeFiltersButton;
