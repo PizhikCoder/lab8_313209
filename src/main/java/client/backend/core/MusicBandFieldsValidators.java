@@ -159,7 +159,7 @@ public class MusicBandFieldsValidators {
     private static boolean coordinateXCheck(String x) {
         try {
             Integer.parseInt(x);
-            return Integer.parseInt(x) <= COORDINATE_X_LIMIT && Integer.parseInt(x) >=0 ;
+            return Integer.parseInt(x) <= COORDINATE_X_LIMIT && Integer.parseInt(x) >0 ;
         } catch (NumberFormatException numberFormatException) {
             return false;
         }
@@ -168,7 +168,7 @@ public class MusicBandFieldsValidators {
     private static boolean coordinateYCheck(String y) {
         y = y.replace(',', '.');
         try {
-            return Double.parseDouble(y)<=COORDINATE_Y_LIMIT && Double.parseDouble(y) >= 0;
+            return Double.parseDouble(y)<=COORDINATE_Y_LIMIT && Double.parseDouble(y) > 0;
         } catch (NumberFormatException numberFormatException) {
             return false;
         }

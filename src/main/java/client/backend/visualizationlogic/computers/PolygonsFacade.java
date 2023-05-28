@@ -1,11 +1,9 @@
 package client.backend.visualizationlogic.computers;
 
 
-import client.backend.visualizationlogic.MusicBandPolygon;
+import client.backend.visualizationlogic.entities.MusicBandPolygon;
 import client.backend.visualizationlogic.entities.StraightLineEquation;
-import client.backend.visualizationlogic.exceptions.UnsolvableCollisionCaseException;
 import javafx.geometry.Point2D;
-import javafx.scene.shape.Polygon;
 
 public class PolygonsFacade {
     public MusicBandPolygon[] checkPolygons(MusicBandPolygon polygon1, MusicBandPolygon polygon2)  {

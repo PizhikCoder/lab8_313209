@@ -1,6 +1,7 @@
 package server.commands;
 
 import server.core.Invoker;
+import server.visualizationhandlers.CirclesProcessor;
 import shared.commands.enums.DataField;
 import shared.connection.requests.AddModelServerRequest;
 import shared.core.models.MusicBand;
@@ -31,6 +32,8 @@ public class AddCommand extends Command implements IDataManipulationCommand {
             band.setId(modelId);
             invoker.getModelsManager().addModels(band);
             invoker.getConnection().sendChangesToAll(new AddModelServerRequest(band));
+            CirclesProcessor circlesProcessor = CirclesProcessor.getInstance(invoker);
+            circlesProcessor.process(band);
             return "Object was successfully created!";
         }
         invoker.getPrinter().print("Object wasn't created.");

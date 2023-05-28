@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Coordinates implements Serializable {
+    private final double Y_MAX_LIMIT = 3000;
+    private final double X_MAX_LIMIT = 3000;
     private int x;
     private double y;
 
@@ -26,11 +28,16 @@ public class Coordinates implements Serializable {
     }
 
     public void setX(int x) {
-        this.x = x;
+        if ((x<=X_MAX_LIMIT && x > 0) || Invoker.getIsDataLoading()){
+            this.x = x;
+        }
+        else {
+            throw new FieldValueIsNotCorrectException();
+        }
     }
 
     public void setY(double y) {
-        if (y<=3000 || Invoker.getIsDataLoading()){
+        if ((y<=Y_MAX_LIMIT && y > 0) || Invoker.getIsDataLoading()){
             this.y = y;
         }
         else {

@@ -4,7 +4,7 @@ import client.backend.commands.Command;
 import client.backend.commands.UpdateCommand;
 import client.backend.core.Invoker;
 import client.backend.core.MusicBandFieldsValidators;
-import client.backend.visualizationlogic.MusicBandPolygon;
+import client.backend.visualizationlogic.entities.MusicBandPolygon;
 import client.backend.visualizationlogic.computers.CirclesComputer;
 import client.backend.visualizationlogic.computers.PolygonsFacade;
 import client.backend.visualizationlogic.entities.StraightLineEquation;

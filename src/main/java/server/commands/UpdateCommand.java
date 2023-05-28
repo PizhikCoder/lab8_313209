@@ -1,6 +1,7 @@
 package server.commands;
 
 import server.core.validators.ModelsValidator;
+import server.visualizationhandlers.CirclesProcessor;
 import shared.commands.enums.DataField;
 import shared.connection.requests.AddModelServerRequest;
 import shared.connection.requests.CommandRequest;
@@ -39,6 +40,8 @@ public class UpdateCommand extends Command implements IDataManipulationCommand {
         if (ModelsValidator.idExist(id) && invoker.getDatabaseHandler().updateModel(data, id)) {
             invoker.getModelsManager().updateModel(id, data, invoker.getPrinter());
             invoker.getConnection().sendChangesToAll(new UpdateModelServerRequest(model));
+            CirclesProcessor circlesProcessor = CirclesProcessor.getInstance(invoker);
+            circlesProcessor.process(model);
             return "Model updating executed!";
         }
         invoker.getPrinter().print("Models was not updated!");

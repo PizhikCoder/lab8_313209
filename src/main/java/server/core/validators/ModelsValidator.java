@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class ModelsValidator {
 
     private static final int Y_LIMIT = 3000;
+    private static final int X_LIMIT = 3000;
 
     private static final Logger logger = Logger.getLogger(ModelsValidator.class.getName());
 
@@ -82,7 +83,7 @@ public class ModelsValidator {
      * @return validating result.
      */
     public static boolean coordinatesValueCheck(Coordinates coordinates){
-        if (!coordinateYCheck(coordinates.getY())){
+        if (!coordinateYCheck(coordinates.getY()) || !coordinateXCheck(coordinates.getX())){
             return false;
         }
         return true;
@@ -109,7 +110,21 @@ public class ModelsValidator {
      * @return validating result.
      */
     public static boolean coordinateYCheck(double y){
-        if (y>Y_LIMIT){
+        if (y>Y_LIMIT && y<0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    /**
+     * Checks coordinate x validity.
+     * @param x
+     * @return validating result.
+     */
+    public static boolean coordinateXCheck(double x){
+        if (x>X_LIMIT && x<0){
             return false;
         }
         else{
