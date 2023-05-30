@@ -78,7 +78,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="canvasXLabel" text="value" GridPane.columnIndex="1" />
+                        <Label fx:id="canvasXLabel" text="0" GridPane.columnIndex="1" />
                         <Label text="X:" GridPane.halignment="CENTER">
                            <font>
                               <Font size="20.0" />
@@ -95,7 +95,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="canvasYLabel" text="value" GridPane.columnIndex="1" />
+                        <Label fx:id="canvasYLabel" text="0" GridPane.columnIndex="1" />
                         <Label text="Y:" GridPane.halignment="CENTER">
                            <font>
                               <Font size="20.0" />

@@ -23,11 +23,15 @@ import java.io.PipedOutputStream;
 public class MainApplication extends Application {
     public final static int MAIN_SCENE_WIDTH = 800;
     public final static int MAIN_SCENE_HEIGHT = 600;
+    private static final String HOST_NAME = "127.0.0.1";
+
+    private static final int MAX_PORT_VALUE = 1023;
+
+    private static final int PORT_INDEX = 0;
     private static Stage primaryStage;
 
     @Override
     public void start(Stage stage) throws IOException {
-//        Parent parent = FXMLLoader.load(getClass().getResource("DataGridForm.fxml"));
         Parent parent = FXMLLoader.load(AuthorizationFormController.class.getResource("AuthorizationForm.fxml"));
         primaryStage = stage;
         Scene scene = new Scene(parent, MAIN_SCENE_WIDTH, MAIN_SCENE_HEIGHT);
@@ -39,14 +43,16 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-        if (createConnection()) {
+        int port = checkPort(args);
+        if (port == -1) return;
+        if (createConnection(port)) {
             launch();
         }
     }
 
-    private static boolean createConnection() {
+    private static boolean createConnection(int port) {
         try {
-            IClientConnection connection = new ClientConnection("127.0.0.1", 2222);
+            IClientConnection connection = new ClientConnection(HOST_NAME, port);
             IPrinter printer = new NotificationPrinter();
             PipedOutputStream pipedOutputStream = new PipedOutputStream();
             Invoker invoker = Invoker.create(printer, pipedOutputStream, connection);
@@ -74,5 +80,25 @@ public class MainApplication extends Application {
 
     public static Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    private static int checkPort(String...args){
+        int port;
+        try{
+            if (args.length == 0){
+                System.err.println("Expected 1 argument, received 0");
+                return -1;
+            }
+            port = Integer.parseInt(args[PORT_INDEX]);
+            if(port<= MAX_PORT_VALUE){
+                System.err.println("Can not start client on this port!");
+                return -1;
+            }
+        }
+        catch (NumberFormatException exception){
+            System.err.println("Port in the wrong format. Expected Integer.");
+            return -1;
+        }
+        return port;
     }
 }

@@ -23,7 +23,8 @@ public class MainFormRB_cro_HRV extends ListResourceBundle {
                 {"helpMenu", "Pomoć"},
                 {"languageMenuItem", "Jezik"},
                 {"logOutMenuItem", "Odjava"},
-                {"executeScriptButton", "Izvrši skriptu"}
+                {"executeScriptButton", "Izvrši skriptu"},
+                {"visualizeButton", "Vizualiziraj"}
         };
         return contents;
     }

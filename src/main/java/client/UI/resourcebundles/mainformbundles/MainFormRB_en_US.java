@@ -23,7 +23,8 @@ public class MainFormRB_en_US extends ListResourceBundle {
                 {"helpMenu", "Help"},
                 {"languageMenuItem", "Language"},
                 {"logOutMenuItem", "Log out"},
-                {"executeScriptButton", "Execute script"}
+                {"executeScriptButton", "Execute script"},
+                {"visualizeButton", "Visualize"}
         };
         return contents;
     }

@@ -1,6 +1,7 @@
 package client.UI.Controllers;
 
 import client.UI.resourcebundles.enums.MusicBandCreatingAndUpdatingFormElements;
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.commands.AddCommand;
 import client.backend.commands.Command;
 import client.backend.core.Invoker;
@@ -113,34 +114,33 @@ public class MusicBandCreatingAndUpdatingFormController {
     }
 
     private void updateLocale(){
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.musicbandcreatingandupdatingformbundles.MusicBandCreatingAndUpdatingFormRB", MainFormController.getCurrentLocale().get().getLocale());
         
-        bandNameTextField.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.BAND_NAME_TEXT_FIELD.toString()));
-        coordinateXTextField.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.COORDINATE_X_TEXT_FIELD.toString()));
-        coordinateYTextField.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.COORDINATE_Y_TEXT_FIELD.toString()));
-        numberOfParticipantsTextField.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.NUMBER_OF_PARTICIPANTS_TEXT_FIELD.toString()));
-        genreComboBox.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.GENRE_COMBO_BOX.toString()));
-        personNameTextField.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.PERSON_NAME_TEXT_FIELD.toString()));
-        personHeightTextField.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.PERSON_HEIGHT_TEXT_FIELD.toString()));
-        personNationalityComboBox.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.PERSON_NATIONALITY_COMBO_BOX.toString()));
-        locationXTextField.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.LOCATION_X_TEXT_FIELD.toString()));
-        locationYTextField.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.LOCATION_Y_TEXT_FIELD.toString()));
-        locationZTextField.setPromptText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.LOCATION_Z_TEXT_FIELD.toString()));
+        bandNameTextField.setPromptText(MusicBandCreatingAndUpdatingFormElements.BAND_NAME_TEXT_FIELD.toString());
+        coordinateXTextField.setPromptText(MusicBandCreatingAndUpdatingFormElements.COORDINATE_X_TEXT_FIELD.toString());
+        coordinateYTextField.setPromptText(MusicBandCreatingAndUpdatingFormElements.COORDINATE_Y_TEXT_FIELD.toString());
+        numberOfParticipantsTextField.setPromptText(MusicBandCreatingAndUpdatingFormElements.NUMBER_OF_PARTICIPANTS_TEXT_FIELD.toString());
+        genreComboBox.setPromptText(MusicBandCreatingAndUpdatingFormElements.GENRE_COMBO_BOX.toString());
+        personNameTextField.setPromptText(MusicBandCreatingAndUpdatingFormElements.PERSON_NAME_TEXT_FIELD.toString());
+        personHeightTextField.setPromptText(MusicBandCreatingAndUpdatingFormElements.PERSON_HEIGHT_TEXT_FIELD.toString());
+        personNationalityComboBox.setPromptText(MusicBandCreatingAndUpdatingFormElements.PERSON_NATIONALITY_COMBO_BOX.toString());
+        locationXTextField.setPromptText(MusicBandCreatingAndUpdatingFormElements.LOCATION_X_TEXT_FIELD.toString());
+        locationYTextField.setPromptText(MusicBandCreatingAndUpdatingFormElements.LOCATION_Y_TEXT_FIELD.toString());
+        locationZTextField.setPromptText(MusicBandCreatingAndUpdatingFormElements.LOCATION_Z_TEXT_FIELD.toString());
 
-        bandNameLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.BAND_NAME_LABEL.toString()));
-        coordinateXLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.COORDINATE_X_LABEL.toString()));
-        coordinateYLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.COORDINATE_Y_LABEL.toString()));
-        numberOfParticipantsLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.NUMBER_OF_PARTICIPANTS_LABEL.toString()));
-        genreLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.GENRE_LABEL.toString()));
-        personNameLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.PERSON_NAME_LABEL.toString()));
-        personHeightLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.PERSON_HEIGHT_LABEL.toString()));
-        personNationalityLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.PERSON_NATIONALITY_LABEL.toString()));
-        locationXLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.LOCATION_X_LABEL.toString()));
-        locationYLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.LOCATION_Y_LABEL.toString()));
-        locationZLabel.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.LOCATION_Z_LABEL.toString()));
+        bandNameLabel.setText(MusicBandCreatingAndUpdatingFormElements.BAND_NAME_LABEL.toString());
+        coordinateXLabel.setText(MusicBandCreatingAndUpdatingFormElements.COORDINATE_X_LABEL.toString());
+        coordinateYLabel.setText(MusicBandCreatingAndUpdatingFormElements.COORDINATE_Y_LABEL.toString());
+        numberOfParticipantsLabel.setText(MusicBandCreatingAndUpdatingFormElements.NUMBER_OF_PARTICIPANTS_LABEL.toString());
+        genreLabel.setText(MusicBandCreatingAndUpdatingFormElements.GENRE_LABEL.toString());
+        personNameLabel.setText(MusicBandCreatingAndUpdatingFormElements.PERSON_NAME_LABEL.toString());
+        personHeightLabel.setText(MusicBandCreatingAndUpdatingFormElements.PERSON_HEIGHT_LABEL.toString());
+        personNationalityLabel.setText(MusicBandCreatingAndUpdatingFormElements.PERSON_NATIONALITY_LABEL.toString());
+        locationXLabel.setText(MusicBandCreatingAndUpdatingFormElements.LOCATION_X_LABEL.toString());
+        locationYLabel.setText(MusicBandCreatingAndUpdatingFormElements.LOCATION_Y_LABEL.toString());
+        locationZLabel.setText(MusicBandCreatingAndUpdatingFormElements.LOCATION_Z_LABEL.toString());
 
-        okButton.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.OK_Button.toString()));
-        cancelButton.setText(resourceBundle.getString(MusicBandCreatingAndUpdatingFormElements.CANCEL_BUTTON.toString()));
+        okButton.setText(MusicBandCreatingAndUpdatingFormElements.OK_Button.toString());
+        cancelButton.setText(MusicBandCreatingAndUpdatingFormElements.CANCEL_BUTTON.toString());
     }
 
     private void preValidation(){
@@ -214,7 +214,7 @@ public class MusicBandCreatingAndUpdatingFormController {
             currentStage.close();
             return;
         }
-        Notifications.create().text("Any fields is not valid!").position(Pos.TOP_CENTER).show();
+        Notifications.create().text(RuntimeOutputs.FIELDS_DOES_NOT_VALID.toString()).position(Pos.TOP_CENTER).show();
     }
 
     @FXML

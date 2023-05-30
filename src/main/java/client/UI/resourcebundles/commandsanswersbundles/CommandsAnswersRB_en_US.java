@@ -25,9 +25,15 @@ public class CommandsAnswersRB_en_US extends ListResourceBundle {
                 {"updateCommandExecuted", "Object was updated!"},
                 {"updateCommandNotExecuted", "Selected object belongs to another user!"},
                 {"countGreaterThanFrontManExecuted", "Music bands with front men, that higher than %s: %s"},
-                {"countGreaterThanFrontManNotExecuted", "Entered height in wrong format!(Expected: float, not null)"},
+                {"countGreaterThanFrontManNotExecuted", "Entered height in wrong format!(Expected:  0<float>=240)"},
                 {"groupCountingByCoordinatesExecuted", "\nGroup of Coordinates: %s\nCount of elements: %s\n"},
-                {"collectionIsEmpty", "Collection is empty!"}
+                {"collectionIsEmpty", "Collection is empty!"},
+                {"addIfMinCommandIdInWrongFormat", "Entered id in wrong format!"},
+                {"addIfMinCommandIdIsNotMin", "Entered is not minimal!"},
+                {"infoCommandExecuted", "Collection info:" +
+                        "\n---Type: Music Band" +
+                        "\n---Elements count: %s"},
+                {"idDoesNotExist", "Entered id does not exist!"}
         };
         return content;
     }

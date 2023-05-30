@@ -25,9 +25,15 @@ public class CommandsAnswersRB_est_EST extends ListResourceBundle {
                 {"updateCommandExecuted", "Objekt uuendati!"},
                 {"updateCommandNotExecuted", "Valitud objekt kuulub teisele kasutajale!"},
                 {"countGreaterThanFrontManExecuted", "Muusikabändid, mille esiliige on kõrgem kui %s: %s"},
-                {"countGreaterThanFrontManNotExecuted", "Sisestatud pikkus on valel kujul! (Oodatud: ujuk, mitte tühi)"},
+                {"countGreaterThanFrontManNotExecuted", "Sisestatud pikkus on valel kujul! (Oodatud: ujuk)"},
                 {"groupCountingByCoordinatesExecuted", "\nKoordinaatide rühm: %s\nElementide arv: %s\n"},
-                {"collectionIsEmpty", "Kollektsioon on tühi!"}
+                {"collectionIsEmpty", "Kollektsioon on tühi!"},
+                {"addIfMinCommandIdInWrongFormat", "Vale formaadis sisestatud ID!"},
+                {"addIfMinCommandIdIsNotMin", "Sisestatud ID ei ole minimaalne!"},
+                {"infoCommandExecuted", "Kogumise info:" +
+                        "\n---Tüüp: Muusika bänd" +
+                        "\n---Elementide arv: %s"},
+                {"idDoesNotExist", "Sisestatud ID ei eksisteeri!"}
         };
         return content;
     }

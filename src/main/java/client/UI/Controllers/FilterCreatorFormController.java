@@ -1,6 +1,7 @@
 package client.UI.Controllers;
 
 import client.UI.resourcebundles.enums.FilterCreatorFormElements;
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.tableHandlers.ColumnNames;
 import client.backend.tableHandlers.predicatefactory.AbstractPredicateFactory;
 import client.backend.tableHandlers.predicatefactory.FilterSigns;
@@ -70,17 +71,15 @@ public class FilterCreatorFormController {
     }
 
     private void updateLocale() {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.filecreatorbundles.FilterCreatorFormRB", MainFormController.getCurrentLocale().get().getLocale());
+        filterColumnLabel.setText(FilterCreatorFormElements.FILTER_COLUMN_LABEL.toString());
+        signLabel.setText(FilterCreatorFormElements.SIGN_LABEL.toString());
+        valueForFilteringLabel.setText(FilterCreatorFormElements.VALUE_FOR_FILTERING_LABEL.toString());
+        filteringValueTextField.setPromptText(FilterCreatorFormElements.FILTERING_VALUE_TEXT_FIELD.toString());
+        columnsForFilteringComboBox.setPromptText(FilterCreatorFormElements.COLUMNS_FOR_FILTERING_COMBO_BOX.toString());
+        signsCombobox.setPromptText(FilterCreatorFormElements.SIGNS_COMBO_BOX.toString());
 
-        filterColumnLabel.setText(resourceBundle.getString(FilterCreatorFormElements.FILTER_COLUMN_LABEL.toString()));
-        signLabel.setText(resourceBundle.getString(FilterCreatorFormElements.SIGN_LABEL.toString()));
-        valueForFilteringLabel.setText(resourceBundle.getString(FilterCreatorFormElements.VALUE_FOR_FILTERING_LABEL.toString()));
-        filteringValueTextField.setPromptText(resourceBundle.getString(FilterCreatorFormElements.FILTERING_VALUE_TEXT_FIELD.toString()));
-        columnsForFilteringComboBox.setPromptText(resourceBundle.getString(FilterCreatorFormElements.COLUMNS_FOR_FILTERING_COMBO_BOX.toString()));
-        signsCombobox.setPromptText(resourceBundle.getString(FilterCreatorFormElements.SIGNS_COMBO_BOX.toString()));
-
-        createButton.setText(resourceBundle.getString(FilterCreatorFormElements.CREATE_BUTTON.toString()));
-        cancelButton.setText(resourceBundle.getString(FilterCreatorFormElements.CANCEL_BUTTON.toString()));
+        createButton.setText(FilterCreatorFormElements.CREATE_BUTTON.toString());
+        cancelButton.setText(FilterCreatorFormElements.CANCEL_BUTTON.toString());
     }
 
     private void columnsForFilteringComboBoxChanged() {
@@ -119,7 +118,7 @@ public class FilterCreatorFormController {
             }
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Can not find filter fxml form!");
+            alert.setHeaderText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.setContentText(e.getMessage());
             alert.show();
         }
@@ -163,7 +162,7 @@ public class FilterCreatorFormController {
             filterFormController.setColumnForFilteringLabel(columnsForFilteringComboBox.getValue());
             return true;
         }
-        Notifications.create().position(Pos.TOP_CENTER).text("Select column!").show();
+        Notifications.create().position(Pos.TOP_CENTER).text(RuntimeOutputs.COLUMN_WAS_NOT_SELECTED.toString()).show();
         return false;
     }
 
@@ -172,7 +171,7 @@ public class FilterCreatorFormController {
             filterFormController.setFilterSignLabel(signsCombobox.getValue());
             return true;
         }
-        Notifications.create().position(Pos.TOP_CENTER).text("Select sign!").show();
+        Notifications.create().position(Pos.TOP_CENTER).text(RuntimeOutputs.SIGN_WAS_NOT_SELECTED.toString()).show();
         return false;
     }
 

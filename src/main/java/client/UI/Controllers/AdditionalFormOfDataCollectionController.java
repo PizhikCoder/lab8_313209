@@ -1,5 +1,6 @@
 package client.UI.Controllers;
 
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -24,7 +25,7 @@ public class AdditionalFormOfDataCollectionController {
     @FXML
     protected void onOkButtonPressed(ActionEvent actionEvent){
         if (valueTextField.getText().isBlank()){
-            Notifications.create().position(Pos.TOP_CENTER).text("Enter value!").show();
+            Notifications.create().position(Pos.TOP_CENTER).text(RuntimeOutputs.VALUE_WAS_NOT_ENTERED.toString()).show();
         }
         currentStage.close();
     }

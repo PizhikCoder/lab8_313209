@@ -17,7 +17,12 @@ public class RuntimeOutputRB_cro_HRV extends ListResourceBundle {
                 {"connectionReconnected", "Ponovno povezan!"},
                 {"connectionReconnectionFailed", "Ponovno povezivanje nije uspjelo!"},
                 {"tcpSenderCanNOtSendRequest", "Ne mogu poslati zahtjev!"},
-                {"canNonInitComponent", "Ne mogu inicijalizirati komponentu!"}
+                {"canNonInitComponent", "Ne mogu inicijalizirati komponentu!"},
+                {"anyFieldsDoesNotValid", "Nijedno polje nije valjano!"},
+                {"modelWasNotSelectedInTable", "Odaberite model u tablici."},
+                {"columnWasNotSelected", "Odaberite stupac!"},
+                {"signWasNotSelected", "Odaberite znak!"},
+                {"valueWasNotEntered", "Unesite vrijednost!"}
         };
         return content;
     }

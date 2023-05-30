@@ -2,6 +2,7 @@ package client.UI.Controllers;
 
 import client.MainApplication;
 import client.UI.resourcebundles.enums.AuthorizationFormElements;
+import client.UI.resourcebundles.enums.CommandsAnswers;
 import client.UI.resourcebundles.enums.MainFormElements;
 import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.commands.SignUpCommand;
@@ -67,15 +68,14 @@ public class AuthorizationFormController {
     }
 
     private void updateLocale(){
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.authorizationformbundles.AuthorizationFormRB", MainFormController.getCurrentLocale().get().getLocale());
-        logInTextField.setPromptText(resourceBundle.getString(AuthorizationFormElements.LOG_IN_TEXT_FIELD.toString()));
-        passwordTextField.setPromptText(resourceBundle.getString(AuthorizationFormElements.PASSWORD_TEXT_FIELD.toString()));
-        settingsMenu.setText(resourceBundle.getString(AuthorizationFormElements.SETTINGS_MENU.toString()));
-        languageMenuItem.setText(resourceBundle.getString(AuthorizationFormElements.LANGUAGE_MENU_ITEM.toString()));
-        loginLabel.setText(resourceBundle.getString(AuthorizationFormElements.LOGIN_LABEL.toString()));
-        passwordLabel.setText(resourceBundle.getString(AuthorizationFormElements.PASSWORD_LABEL.toString()));
-        signUpButton.setText(resourceBundle.getString(AuthorizationFormElements.SIGN_UP_BUTTON.toString()));
-        signInButton.setText(resourceBundle.getString(AuthorizationFormElements.SIGN_IN_BUTTON.toString()));
+        logInTextField.setPromptText(AuthorizationFormElements.LOG_IN_TEXT_FIELD.toString());
+        passwordTextField.setPromptText(AuthorizationFormElements.PASSWORD_TEXT_FIELD.toString());
+        settingsMenu.setText(AuthorizationFormElements.SETTINGS_MENU.toString());
+        languageMenuItem.setText(AuthorizationFormElements.LANGUAGE_MENU_ITEM.toString());
+        loginLabel.setText(AuthorizationFormElements.LOGIN_LABEL.toString());
+        passwordLabel.setText(AuthorizationFormElements.PASSWORD_LABEL.toString());
+        signUpButton.setText(AuthorizationFormElements.SIGN_UP_BUTTON.toString());
+        signInButton.setText(AuthorizationFormElements.SIGN_IN_BUTTON.toString());
     }
 
     @FXML
@@ -129,7 +129,7 @@ public class AuthorizationFormController {
         }
         else {
             IPrinter printer = Invoker.getInstance().getPrinter();
-            printer.print("Client was not registered!");
+            printer.print(CommandsAnswers.SIGN_UP_COMMAND_NOT_EXECUTED.toString());
         }
         button.setDisable(false);
     }

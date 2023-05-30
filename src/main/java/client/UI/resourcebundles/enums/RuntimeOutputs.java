@@ -5,6 +5,11 @@ import client.UI.Controllers.MainFormController;
 import java.util.ResourceBundle;
 
 public enum RuntimeOutputs {
+    VALUE_WAS_NOT_ENTERED("valueWasNotEntered"),
+    SIGN_WAS_NOT_SELECTED("signWasNotSelected"),
+    COLUMN_WAS_NOT_SELECTED("columnWasNotSelected"),
+    MODEL_WAS_NOT_SELECTED_IN_TABLE("modelWasNotSelectedInTable"),
+    FIELDS_DOES_NOT_VALID("anyFieldsDoesNotValid"),
     UNKNOWN_COMMAND_EXCEPTION_OUTPUT("unknownCommandExceptionOutput"),
     FILE_LISTENER_CAN_NOT_READ_FILE("fileListenerCanNotReadFromFile"),
     FILE_LISTENER_PROBLEM_WITH_SCRIPT_FILE("fileListenerProblemWithScriptFile"),

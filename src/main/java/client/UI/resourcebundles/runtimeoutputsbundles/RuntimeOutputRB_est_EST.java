@@ -17,7 +17,12 @@ public class RuntimeOutputRB_est_EST extends ListResourceBundle {
                 {"connectionReconnected", "Ühendus taastatud!"},
                 {"connectionReconnectionFailed", "Ühenduse taastamine ebaõnnestus!"},
                 {"tcpSenderCanNOtSendRequest", "Ei saa päringut saata!"},
-                {"canNonInitComponent", "Komponenti ei saa algatada!"}
+                {"canNonInitComponent", "Komponenti ei saa algatada!"},
+                {"anyFieldsDoesNotValid", "Ükski väli ei ole kehtiv!"},
+                {"modelWasNotSelectedInTable", "Valige tabelis mudel."},
+                {"columnWasNotSelected", "Valige veerg!"},
+                {"signWasNotSelected", "Valige märk!"},
+                {"valueWasNotEntered", "Sisestage väärtus!"}
         };
         return content;
     }

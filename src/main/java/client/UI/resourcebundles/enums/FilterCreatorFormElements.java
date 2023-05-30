@@ -1,5 +1,9 @@
 package client.UI.resourcebundles.enums;
 
+import client.UI.Controllers.MainFormController;
+
+import java.util.ResourceBundle;
+
 public enum FilterCreatorFormElements {
     FILTER_COLUMN_LABEL("filterColumnLabel"),
     SIGN_LABEL("signLabel"),
@@ -17,6 +21,7 @@ public enum FilterCreatorFormElements {
 
     @Override
     public String toString() {
-        return bundleObjectName;
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.filecreatorbundles.FilterCreatorFormRB", MainFormController.getCurrentLocale().get().getLocale());
+        return resourceBundle.getString(bundleObjectName);
     }
 }

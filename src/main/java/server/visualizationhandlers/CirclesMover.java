@@ -102,11 +102,11 @@ public class CirclesMover {
         if (coordinates.getX() + Math.round(velocity[SPEED_VECTOR_X_INDEX]) <= 0 || coordinates.getY() + velocity[SPEED_VECTOR_Y_INDEX]<0){
             return;
         }
-        if (ModelsValidator.idExist(musicBand.getId()) && invoker.getDatabaseHandler().updateModel(musicBand.toHashMap(), musicBand.getId())) {
-            coordinates.setX((int)(coordinates.getX() + Math.round(velocity[SPEED_VECTOR_X_INDEX])));
-            coordinates.setY(coordinates.getY() + velocity[SPEED_VECTOR_Y_INDEX]);
-            Map<DataField, Object> data = musicBand.toHashMap();
-            data.put(DataField.COORDINATES, coordinates);
+        coordinates.setX((int)(coordinates.getX() + Math.round(velocity[SPEED_VECTOR_X_INDEX])));
+        coordinates.setY(coordinates.getY() + velocity[SPEED_VECTOR_Y_INDEX]);
+        Map<DataField, Object> data = musicBand.toHashMap();
+        data.put(DataField.COORDINATES, coordinates);
+        if (ModelsValidator.idExist(musicBand.getId()) && invoker.getDatabaseHandler().updateModel(data, musicBand.getId())) {
             modelsManager.updateModel(musicBand.getId(), data, invoker.getPrinter());
             invoker.getConnection().sendChangesToAll(new UpdateModelServerRequest(musicBand));
         }

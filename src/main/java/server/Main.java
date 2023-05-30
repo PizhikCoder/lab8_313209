@@ -1,6 +1,7 @@
 package server;
 
 import client.UI.resourcebundles.enums.RuntimeOutputs;
+import javafx.application.Platform;
 import server.connection.ConnectionHandler;
 import server.database.DatabaseHandler;
 import server.database.PostgresDataBase;
@@ -22,11 +23,11 @@ public class Main {
     private static int port;
 
     private static String bd_hostName;
-    //"s368480"
+
     private static String pass;
-    //"DrhmrowGMwNY6Euo"
+
     private static String url;
-    //"jdbc:postgresql://localhost:5432/studs"
+
 
     private static final int PORT_INDEX = 0;
 
@@ -85,6 +86,7 @@ public class Main {
             if (args.length != 4) {
                 logger.log(Level.INFO, "Expected 4 argument, received 0");
                 System.exit(1);
+                Platform.exit();
             }
             port = Integer.parseInt(args[PORT_INDEX]);
             bd_hostName = args[HOSTNAME_INDEX];
@@ -93,10 +95,12 @@ public class Main {
             if (port <= 1023) {
                 logger.log(Level.INFO, "Can not start server on this port!");
                 System.exit(1);
+                Platform.exit();
             }
         } catch (NumberFormatException exception) {
             logger.log(Level.WARNING, "Port in the wrong format. Expected Integer.");
             System.exit(1);
+            Platform.exit();
         }
     }
 }

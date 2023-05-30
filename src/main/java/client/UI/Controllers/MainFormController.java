@@ -2,6 +2,7 @@ package client.UI.Controllers;
 
 import client.MainApplication;
 import client.UI.resourcebundles.enums.AvailableLocales;
+import client.UI.resourcebundles.enums.CommandsAnswers;
 import client.UI.resourcebundles.enums.MainFormElements;
 import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.commands.*;
@@ -45,6 +46,9 @@ public class MainFormController {
 
     @FXML
     private MenuItem languageMenuItem;
+
+    @FXML
+    private MenuItem infoMenuItem;
 
     @FXML
     private MenuItem logOutMenuItem;
@@ -99,6 +103,9 @@ public class MainFormController {
     @FXML
     private Menu userMenu;
 
+    @FXML
+    private Button visualizeButton;
+
     private static SimpleObjectProperty<AvailableLocales> currentLocale = new SimpleObjectProperty<>(AvailableLocales.ENGLISH);
 
     private final int VISUALIZATION_FORM_WIDTH = 800;
@@ -132,32 +139,33 @@ public class MainFormController {
         mainFormController = this;
         tableViewHandler = new TableViewHandler(tableView, modelsCollection);
         tableViewHandler.initializeColumns();
-        currentLocale.addListener(change->updateLocale());
+        currentLocale.addListener(change -> updateLocale());
         updateLocale();
     }
 
-    private void updateLocale(){
+    private void updateLocale() {
         tableViewHandler.initializeColumns();
 
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.mainformbundles.MainFormRB", currentLocale.get().getLocale());
-        removeFiltersButton.setText(resourceBundle.getString(MainFormElements.REMOVE_FILTERS_BUTTON.toString()));
-        createFilterButton.setText(resourceBundle.getString(MainFormElements.CREATE_FILTER_BUTTON.toString()));
-        addButton.setText(resourceBundle.getString(MainFormElements.ADD_BUTTON.toString()));
-        addIfMinButton.setText(resourceBundle.getString(MainFormElements.ADD_IF_MIN_BUTTON.toString()));
-        updateButton.setText(resourceBundle.getString(MainFormElements.UPDATE_BUTTON.toString()));
-        removeButton.setText(resourceBundle.getString(MainFormElements.REMOVE_BUTTON.toString()));
-        removeByIdButton.setText(resourceBundle.getString(MainFormElements.REMOVE_BY_ID_BUTTON.toString()));
-        clearButton.setText(resourceBundle.getString(MainFormElements.CLEAR_BUTTON.toString()));
-        filterLessThanFrontManButton.setText(resourceBundle.getString(MainFormElements.FILTER_LESS_THAN_FRONT_MAN_BUTTON.toString()));
-        countGreaterThanFrontManButton.setText(resourceBundle.getString(MainFormElements.COUNT_GREATER_THAN_FRONT_MAN_BUTTON.toString()));
-        groupCountingByCoordinatesButton.setText(resourceBundle.getString(MainFormElements.GROUP_COUNTING_BY_COORDINATES_BUTTON.toString()));
-        controllersLabel.setText(resourceBundle.getString(MainFormElements.CONTROLLERS_LABEL.toString()));
-        infoMenu.setText(resourceBundle.getString(MainFormElements.INFO_MENU.toString()));
-        helpMenu.setText(resourceBundle.getString(MainFormElements.HELP_MENU.toString()));
-        settingsMenu.setText(resourceBundle.getString(MainFormElements.SETTINGS_MENU.toString()));
-        logOutMenuItem.setText(resourceBundle.getString(MainFormElements.LOG_OUT_MENU_ITEM.toString()));
-        languageMenuItem.setText(resourceBundle.getString(MainFormElements.LANGUAGE_MENU_ITEM.toString()));
-        executeScriptButton.setText(resourceBundle.getString(MainFormElements.EXECUTE_SCRIPT_BUTTON.toString()));
+        removeFiltersButton.setText(MainFormElements.REMOVE_FILTERS_BUTTON.toString());
+        createFilterButton.setText(MainFormElements.CREATE_FILTER_BUTTON.toString());
+        addButton.setText(MainFormElements.ADD_BUTTON.toString());
+        addIfMinButton.setText(MainFormElements.ADD_IF_MIN_BUTTON.toString());
+        updateButton.setText(MainFormElements.UPDATE_BUTTON.toString());
+        removeButton.setText(MainFormElements.REMOVE_BUTTON.toString());
+        removeByIdButton.setText(MainFormElements.REMOVE_BY_ID_BUTTON.toString());
+        clearButton.setText(MainFormElements.CLEAR_BUTTON.toString());
+        filterLessThanFrontManButton.setText(MainFormElements.FILTER_LESS_THAN_FRONT_MAN_BUTTON.toString());
+        countGreaterThanFrontManButton.setText(MainFormElements.COUNT_GREATER_THAN_FRONT_MAN_BUTTON.toString());
+        groupCountingByCoordinatesButton.setText(MainFormElements.GROUP_COUNTING_BY_COORDINATES_BUTTON.toString());
+        controllersLabel.setText(MainFormElements.CONTROLLERS_LABEL.toString());
+        infoMenu.setText(MainFormElements.INFO_MENU.toString());
+        helpMenu.setText(MainFormElements.HELP_MENU.toString());
+        settingsMenu.setText(MainFormElements.SETTINGS_MENU.toString());
+        logOutMenuItem.setText(MainFormElements.LOG_OUT_MENU_ITEM.toString());
+        languageMenuItem.setText(MainFormElements.LANGUAGE_MENU_ITEM.toString());
+        executeScriptButton.setText(MainFormElements.EXECUTE_SCRIPT_BUTTON.toString());
+        visualizeButton.setText(MainFormElements.VISUALIZE_BUTTON.toString());
+        infoMenuItem.setText(MainFormElements.INFO_MENU.toString());
     }
 
     @FXML
@@ -185,7 +193,6 @@ public class MainFormController {
         try {
             button.setDisable(true);
             AdditionalFormOfDataCollectionController additionalFormOfDataCollectionController = initAdditionalForm();
-            additionalFormOfDataCollectionController.setPromptText("Enter music band id.");
             String value = additionalFormOfDataCollectionController.getResult();
             prepareAndInvokeRemoveByIdCommand(value);
         } catch (IOException exception) {
@@ -207,7 +214,7 @@ public class MainFormController {
         if (MusicBandFieldsValidators.bandIdValidate(value)) {
             long id = Long.parseLong(value);
             if (modelsCollection.stream().map(MusicBand::getId).noneMatch(x -> x == id)) {
-                Notifications.create().position(Pos.TOP_CENTER).text("Entered id does not exist!").show();
+                Notifications.create().position(Pos.TOP_CENTER).text(CommandsAnswers.ID_DOES_NOT_EXIST.toString()).show();
                 return;
             }
             Command command = new RemoveByIdCommand(Invoker.getInstance());
@@ -245,14 +252,13 @@ public class MainFormController {
         try {
             button.setDisable(true);
             AdditionalFormOfDataCollectionController additionalFormOfDataCollectionController = initAdditionalForm();
-            additionalFormOfDataCollectionController.setPromptText("Enter front man height.");
             String value = additionalFormOfDataCollectionController.getResult();
             if (!value.isBlank() && MusicBandFieldsValidators.personHeightCheck(value)) {
                 value = value.replace(",", ".");
                 Command command = new FilterLessThanFrontManCommand(filtersHBox);
                 Invoker.getInstance().invokeCommand(command, value);
             } else {
-                Notifications.create().text("Entered height in wrong format!(Expected: float)");
+                Notifications.create().text(CommandsAnswers.COUNT_GREATER_THAN_FRONT_MAN_NOT_EXECUTED.toString()).show();
             }
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -275,7 +281,7 @@ public class MainFormController {
                 Invoker.getInstance().invokeCommand(command, String.valueOf(musicBand.getId()));
             } else {
                 IPrinter printer = Invoker.getInstance().getPrinter();
-                printer.print("Select model in table.");
+                printer.print(RuntimeOutputs.MODEL_WAS_NOT_SELECTED_IN_TABLE.toString());
             }
         } finally {
             button.setDisable(false);
@@ -284,12 +290,11 @@ public class MainFormController {
     }
 
     @FXML
-    protected void onCountGreaterThanFrontManButtonPressed(ActionEvent actionEvent){
+    protected void onCountGreaterThanFrontManButtonPressed(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();
         try {
             button.setDisable(true);
             AdditionalFormOfDataCollectionController additionalFormOfDataCollectionController = initAdditionalForm();
-            additionalFormOfDataCollectionController.setPromptText("Enter person height.");
             String value = additionalFormOfDataCollectionController.getResult();
             Command command = new CountGreaterThanFrontManCommand(tableViewHandler.getSortedList().toArray(MusicBand[]::new));
             Invoker.getInstance().invokeCommand(command, value);
@@ -303,10 +308,10 @@ public class MainFormController {
     }
 
     @FXML
-    protected void onExecuteScriptButtonPressed(ActionEvent actionEvent){
+    protected void onExecuteScriptButtonPressed(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(new Stage());
-        if (file!=null && file.exists()){
+        if (file != null && file.exists()) {
             Command command = new ExecuteScriptCommand(Invoker.getInstance().getPrinter());
             Invoker.getInstance().invokeCommand(command, file.getAbsolutePath());
         }
@@ -318,7 +323,6 @@ public class MainFormController {
         try {
             button.setDisable(true);
             AdditionalFormOfDataCollectionController additionalFormOfDataCollectionController = initAdditionalForm();
-            additionalFormOfDataCollectionController.setPromptText("Enter music band id.");
             String value = additionalFormOfDataCollectionController.getResult();
             prepareAndInvokeAddIfMinCommand(value);
         } catch (IOException exception) {
@@ -331,16 +335,16 @@ public class MainFormController {
     }
 
     @FXML
-    protected void onGroupCountingByCoordinatesButtonPressed(ActionEvent actionEvent){
+    protected void onGroupCountingByCoordinatesButtonPressed(ActionEvent actionEvent) {
         Command command = new GroupCountingByCoordinatesCommand(MainFormController.getMainFormController().getTableViewHandler().getSortedList().toArray(MusicBand[]::new));
         Invoker.getInstance().invokeCommand(command);
     }
 
     @FXML
-    protected void onVisualizationButtonPressed(ActionEvent actionEvent){
+    protected void onVisualizationButtonPressed(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();
         Stage stage = new Stage();
-        try{
+        try {
             button.setDisable(true);
             FXMLLoader fxmlLoader = new FXMLLoader(VisualizerFormController.class.getResource("VisualizerForm.fxml"));
             Parent parent = fxmlLoader.load();
@@ -349,26 +353,25 @@ public class MainFormController {
             stage.setResizable(false);
             stage.showAndWait();
             stage.close();
-            ((VisualizerFormController)fxmlLoader.getController()).clearResources();
+            ((VisualizerFormController) fxmlLoader.getController()).clearResources();
             System.gc();
 
-        }
-        catch (IOException exception) {
+        } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
-        }
-        finally {
+        } finally {
             button.setDisable(false);
         }
     }
+
 
     private void prepareAndInvokeAddIfMinCommand(String value) {
         try {
             if (MusicBandFieldsValidators.bandIdValidate(value)) {
                 long id = Long.parseLong(value);
                 if (modelsCollection.stream().map(MusicBand::getId).anyMatch(x -> x <= id)) {
-                    Notifications.create().position(Pos.TOP_CENTER).text("Entered id does not minimal!").show();
+                    Notifications.create().position(Pos.TOP_CENTER).text(CommandsAnswers.ADD_IF_MIN_COMMAND_ID_IS_NOT_MIN.toString()).show();
                     return;
                 }
                 MusicBandCreatingAndUpdatingFormController musicBandCreatingAndUpdatingFormController = initCreatingForm();
@@ -376,7 +379,7 @@ public class MainFormController {
                 Command command = new AddIfMinCommand(Invoker.getInstance(), id, data);
                 Invoker.getInstance().invokeCommand(command, value);
             } else {
-                Notifications.create().position(Pos.TOP_CENTER).text("Entered id in wrong format!").show();
+                Notifications.create().position(Pos.TOP_CENTER).text(CommandsAnswers.ADD_IF_MIN_COMMAND_ID_IN_WRONG_FORMAT.toString()).show();
             }
         } catch (IOException ioException) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -432,7 +435,7 @@ public class MainFormController {
                 }
             } else {
                 IPrinter printer = Invoker.getInstance().getPrinter();
-                printer.print("Select model in table.");
+                printer.print(RuntimeOutputs.MODEL_WAS_NOT_SELECTED_IN_TABLE.toString());
             }
         } finally {
             button.setDisable(false);
@@ -440,8 +443,8 @@ public class MainFormController {
     }
 
     @FXML
-    protected void onLanguageMenuItemPressed(ActionEvent actionEvent){
-        try{
+    protected void onLanguageMenuItemPressed(ActionEvent actionEvent) {
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(LanguageChangingFormController.class.getResource("LanguageChangingForm.fxml"));
             Parent parent = fxmlLoader.load();
             LanguageChangingFormController languageChangingFormController = fxmlLoader.getController();
@@ -450,12 +453,17 @@ public class MainFormController {
             languageChangingFormController.setCurrentStage(stage);
             stage.setScene(scene);
             stage.show();
-        }
-        catch (IOException ioException){
+        } catch (IOException ioException) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
             alert.show();
         }
+    }
+
+    @FXML
+    protected void onInfoMenuItemPressed(ActionEvent actionEvent) {
+        Command command = new InfoCommand(modelsCollection);
+        Invoker.getInstance().invokeCommand(command);
     }
 
 
@@ -473,7 +481,7 @@ public class MainFormController {
 
     private boolean checkModelUserId(MusicBand musicBand) {
         if (ClientInfo.getUserId() != musicBand.getOwnerId()) {
-            Notifications.create().text("Selected model belongs to another user!").position(Pos.TOP_CENTER).show();
+            Notifications.create().text(CommandsAnswers.UPDATE_COMMAND_NOT_EXECUTED.toString()).position(Pos.TOP_CENTER).show();
             return false;
         }
         return true;
@@ -508,15 +516,15 @@ public class MainFormController {
         return userMenu;
     }
 
-    public static SimpleObjectProperty<AvailableLocales> getCurrentLocale(){
+    public static SimpleObjectProperty<AvailableLocales> getCurrentLocale() {
         return currentLocale;
     }
 
-    public static void setCurrentLocale(AvailableLocales availableLocales){
+    public static void setCurrentLocale(AvailableLocales availableLocales) {
         currentLocale.set(availableLocales);
     }
 
-    public ObservableList<MusicBand> getModelsCollection(){
+    public ObservableList<MusicBand> getModelsCollection() {
         return modelsCollection;
     }
 }

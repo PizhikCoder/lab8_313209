@@ -5,6 +5,10 @@ import client.UI.Controllers.MainFormController;
 import java.util.ResourceBundle;
 
 public enum CommandsAnswers {
+    ID_DOES_NOT_EXIST("isDoesNotExist"),
+    INFO_EXECUTED("infoCommandExecuted"),
+    ADD_IF_MIN_COMMAND_ID_IS_NOT_MIN("addIfMinCommandIdIsNotMin"),
+    ADD_IF_MIN_COMMAND_ID_IN_WRONG_FORMAT("addIfMinCommandIdInWrongFormat"),
     ADD_COMMAND_EXECUTED("addCommandExecuted"),
     ADD_COMMAND_NOT_EXECUTED("addCommandNotExecuted"),
     ADD_IF_MIN_COMMAND_EXECUTED("addIfMinCommandExecuted"),

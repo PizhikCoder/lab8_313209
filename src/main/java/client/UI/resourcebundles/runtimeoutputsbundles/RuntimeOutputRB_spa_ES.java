@@ -17,7 +17,12 @@ public class RuntimeOutputRB_spa_ES extends ListResourceBundle {
                 {"connectionReconnected", "Reconectado"},
                 {"connectionReconnectionFailed", "Error al reconectar"},
                 {"tcpSenderCanNOtSendRequest", "No se puede enviar la solicitud"},
-                {"canNonInitComponent", "No se puede inicializar el componente"}
+                {"canNonInitComponent", "No se puede inicializar el componente"},
+                {"anyFieldsDoesNotValid", "¡Ningún campo es válido!"},
+                {"modelWasNotSelectedInTable", "Seleccione un modelo en la tabla."},
+                {"columnWasNotSelected", "¡Seleccione una columna!"},
+                {"signWasNotSelected", "¡Seleccione un signo!"},
+                {"valueWasNotEntered", "¡Ingrese un valor!"}
         };
         return content;
     }

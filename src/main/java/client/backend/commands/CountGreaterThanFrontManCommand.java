@@ -36,19 +36,23 @@ public class CountGreaterThanFrontManCommand extends Command{
             throw new CommandParamsException(args.length, EXPECTED_ARGUMENTS_COUNT);
         }
         if (!args[HEIGHT_INDEX].isBlank() && MusicBandFieldsValidators.personHeightCheck(args[HEIGHT_INDEX])) {
-            String value = args[HEIGHT_INDEX].replace(",", ".");
-            float height = Float.parseFloat(value);
-            long count = Arrays.stream(collection)
-                    .filter(x->x.getFrontMan().getHeight()!=null
-                            && x.getFrontMan().getHeight()>height).count();
-            Platform.runLater(()->{
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText(String.format(CommandsAnswers.COUNT_GREATER_THAN_FRONT_MAN_EXECUTED.toString(), height, count));
-                alert.show();
-            });
+            startCounting(args);
             return true;
         }
         Invoker.getInstance().getPrinter().print(CommandsAnswers.COUNT_GREATER_THAN_FRONT_MAN_NOT_EXECUTED.toString());
         return false;
+    }
+
+    private void startCounting(String[] args){
+        String value = args[HEIGHT_INDEX].replace(",", ".");
+        float height = Float.parseFloat(value);
+        long count = Arrays.stream(collection)
+                .filter(x->x.getFrontMan().getHeight()!=null
+                        && x.getFrontMan().getHeight()>height).count();
+        Platform.runLater(()->{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText(String.format(CommandsAnswers.COUNT_GREATER_THAN_FRONT_MAN_EXECUTED.toString(), height, count));
+            alert.show();
+        });
     }
 }

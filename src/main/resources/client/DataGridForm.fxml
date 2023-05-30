@@ -29,7 +29,10 @@
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
       <MenuBar maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-background-color: null;">
         <menus>
-          <Menu fx:id="infoMenu" mnemonicParsing="false" text="Info" />
+          <Menu fx:id="infoMenu" mnemonicParsing="false" text="Info">
+               <items>
+                  <MenuItem fx:id="infoMenuItem" mnemonicParsing="false" onAction="#onInfoMenuItemPressed" text="Info" />
+               </items></Menu>
           <Menu fx:id="settingsMenu" mnemonicParsing="false" text="Settings">
             <items>
               <MenuItem fx:id="languageMenuItem" mnemonicParsing="false" onAction="#onLanguageMenuItemPressed" text="Language" />
@@ -78,7 +81,7 @@
                         <Button fx:id="removeFiltersButton" mnemonicParsing="false" onAction="#onFilterRemovingButtonPressed" text="Remove Filters" />
                      </children>
                   </HBox>
-                  <Button fx:id="visualizeButton" onAction="#onVisualizationButtonPressed" mnemonicParsing="false" text="Visualize" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                  <Button fx:id="visualizeButton" mnemonicParsing="false" onAction="#onVisualizationButtonPressed" text="Visualize" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                </children>
             </GridPane>
          </children>

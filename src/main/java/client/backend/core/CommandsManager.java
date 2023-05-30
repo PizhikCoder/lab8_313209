@@ -3,6 +3,7 @@ package client.backend.core;
 import client.UI.Controllers.MainFormController;
 import client.backend.commands.*;
 import client.backend.commands.adapters.AddCommandAdapter;
+import client.backend.commands.adapters.UpdateCommandAdapter;
 import shared.core.models.MusicBand;
 
 import java.util.HashMap;
@@ -25,6 +26,8 @@ public class CommandsManager {
         commandsCollection.put("filter_less_than_frontman", new FilterLessThanFrontManCommand(MainFormController.getMainFormController().getFiltersHBox()));
         commandsCollection.put("group_count_by_coordinates", new GroupCountingByCoordinatesCommand(MainFormController.getMainFormController().getTableViewHandler().getSortedList().toArray(MusicBand[]::new)));
         commandsCollection.put("remove_by_id", new RemoveByIdCommand(Invoker.getInstance()));
+        commandsCollection.put("update", new UpdateCommandAdapter());
+        commandsCollection.put("add_if_min", new AddCommandAdapter());
     }
 
     public Optional<Command> findCommand(String command){

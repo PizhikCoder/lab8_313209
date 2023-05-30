@@ -23,7 +23,8 @@ public class MainFormRB_est_EST extends ListResourceBundle {
                 {"helpMenu", "Abi"},
                 {"languageMenuItem", "Keel"},
                 {"logOutMenuItem", "Logi välja"},
-                {"executeScriptButton", "Käivita skript"}
+                {"executeScriptButton", "Käivita skript"},
+                {"visualizeButton", "Visualiseerida"}
         };
         return contents;
     }

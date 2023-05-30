@@ -1,5 +1,9 @@
 package client.UI.resourcebundles.enums;
 
+import client.UI.Controllers.MainFormController;
+
+import java.util.ResourceBundle;
+
 public enum AuthorizationFormElements {
     LOG_IN_TEXT_FIELD("logInTextField"),
     PASSWORD_TEXT_FIELD("passwordTextField"),
@@ -17,6 +21,7 @@ public enum AuthorizationFormElements {
 
     @Override
     public String toString() {
-        return bundleObjectName;
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.authorizationformbundles.AuthorizationFormRB", MainFormController.getCurrentLocale().get().getLocale());
+        return resourceBundle.getString(bundleObjectName);
     }
 }

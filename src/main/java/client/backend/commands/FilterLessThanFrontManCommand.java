@@ -2,6 +2,7 @@ package client.backend.commands;
 
 import client.UI.Controllers.FilterCreatorFormController;
 import client.UI.Controllers.FilterFormController;
+import client.UI.resourcebundles.enums.RuntimeOutputs;
 import client.backend.core.MusicBandFieldsValidators;
 import client.backend.tableHandlers.ColumnNames;
 import client.backend.tableHandlers.TableViewHandler;
@@ -45,14 +46,15 @@ public class FilterLessThanFrontManCommand extends Command {
                 filterFormController.setFilteringValueLabel(ColumnNames.PERSON_HEIGHT_COLUMN.toString());
                 filterFormController.setFilterSignLabel(FilterSigns.LESS_THAN);
                 filterFormController.setFilteringValueLabel(String.valueOf(height));
-                filtersHBox.getChildren().add(node);
+                Platform.runLater(()-> filtersHBox.getChildren().add(node));
                 initPredicate(filterFormController, String.valueOf(height));
                 return true;
             }
+
         } catch (IOException e) {
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Can not find filter fxml form!");
+                alert.setHeaderText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
                 alert.setContentText(e.getMessage());
             });
         }

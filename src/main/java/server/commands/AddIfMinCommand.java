@@ -2,6 +2,7 @@ package server.commands;
 
 import server.core.Invoker;
 import server.core.validators.ModelsValidator;
+import server.visualizationhandlers.CirclesProcessor;
 import shared.commands.enums.DataField;
 import shared.connection.requests.AddModelServerRequest;
 import shared.connection.requests.CommandRequest;
@@ -36,6 +37,8 @@ public class AddIfMinCommand extends Command implements IDataManipulationCommand
             if (res!=-1){
                 invoker.getModelsManager().addModels(model);
                 invoker.getConnection().sendChangesToAll(new AddModelServerRequest(model));
+                CirclesProcessor circlesProcessor = CirclesProcessor.getInstance(invoker);
+                circlesProcessor.process(model);
                 invoker.getPrinter().print("Object was successfully created!");
             }
             return "Add If Min command executed!";

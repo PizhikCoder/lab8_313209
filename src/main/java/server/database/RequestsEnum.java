@@ -28,6 +28,53 @@ public enum RequestsEnum {
     UPDATE_PERSON("UPDATE person\n" +
             "SET name = ?, height = ?\n" +
             "WHERE id = ?;"),
+    CREATION_REQUEST("CREATE TABLE IF NOT EXISTS Coordinates (\n" +
+            "  id serial PRIMARY KEY,\n" +
+            "  x integer,\n" +
+            "  y float8\n" +
+            ");\n" +
+            "\n" +
+            "CREATE TABLE IF NOT EXISTS Location (\n" +
+            "  id serial PRIMARY KEY,\n" +
+            "  x integer,\n" +
+            "  y float4 NOT NULL,\n" +
+            "  z float4 NOT NULL\n" +
+            ");\n" +
+            "\n" +
+            "CREATE TABLE IF NOT EXISTS MusicGenre (\n" +
+            "  id serial PRIMARY KEY,\n" +
+            "  genre text\n" +
+            ");\n" +
+            "\n" +
+            "CREATE TABLE IF NOT EXISTS Country (\n" +
+            "  id serial PRIMARY KEY,\n" +
+            "  name text NOT NULL\n" +
+            ");\n" +
+            "\n" +
+            "CREATE TABLE IF NOT EXISTS Person (\n" +
+            "  id serial PRIMARY KEY,\n" +
+            "  name text NOT NULL ,\n" +
+            "  height float4,\n" +
+            "  nationality_id integer NOT NULL REFERENCES Country(id),\n" +
+            "  location_id integer NOT NULL REFERENCES Location(id)\n" +
+            ");\n" +
+            "\n" +
+            "CREATE TABLE IF NOT EXISTS Client (\n" +
+            "  id serial PRIMARY KEY,\n" +
+            "  login text NOT NULL,\n" +
+            "  password text NOT NULL\n" +
+            ");\n" +
+            "\n" +
+            "CREATE TABLE IF NOT EXISTS MusicBand (\n" +
+            "  id bigserial PRIMARY KEY,\n" +
+            "  owner_id integer NOT NULL REFERENCES Client(id),\n" +
+            "  name text NOT NULL,\n" +
+            "  coordinates_id integer NOT NULL REFERENCES Coordinates(id),\n" +
+            "  creationDate timestamp NOT NULL,\n" +
+            "  numberOfParticipants integer NOT NULL,\n" +
+            "  genre_id integer NOT NULL REFERENCES MusicGenre(id),\n" +
+            "  frontMan_id integer NOT NULL REFERENCES Person(id)\n" +
+            ");"),
     SEND_PERSON("INSERT INTO person (name, height, nationality_id, location_id) VALUES (?, ?, ?, ?) RETURNING id;"),
     SEND_GENRE("INSERT INTO musicgenre (genre) VALUES (?) RETURNING id;"),
     SEND_LOCATION("INSERT INTO location (x, y, z) VALUES (?, ?, ?) RETURNING id;"),

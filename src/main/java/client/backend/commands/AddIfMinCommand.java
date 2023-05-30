@@ -16,8 +16,6 @@ import java.util.Map;
  */
 public class AddIfMinCommand extends Command  {
     private final Invoker invoker;
-    private final int ID_INDEX = 0;
-    private final int EXPECTED_ARGUMENTS_COUNT = 1;
     private final long id;
     private final Map<DataField, Object> data;
 

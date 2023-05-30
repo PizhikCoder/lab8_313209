@@ -1,5 +1,9 @@
 package client.UI.resourcebundles.enums;
 
+import client.UI.Controllers.MainFormController;
+
+import java.util.ResourceBundle;
+
 public enum MusicBandCreatingAndUpdatingFormElements {
     
     BAND_NAME_TEXT_FIELD("bandNameTextField"),
@@ -34,6 +38,7 @@ public enum MusicBandCreatingAndUpdatingFormElements {
 
     @Override
     public String toString() {
-        return bundleObjectName;
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.musicbandcreatingandupdatingformbundles.MusicBandCreatingAndUpdatingFormRB", MainFormController.getCurrentLocale().get().getLocale());
+        return resourceBundle.getString(bundleObjectName);
     }
 }

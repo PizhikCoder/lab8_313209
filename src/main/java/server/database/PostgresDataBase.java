@@ -53,6 +53,7 @@ public class PostgresDataBase implements IDatabase {
             if (connection == null) {
                 throw new SQLException();
             }
+            sendQuery(connection.prepareStatement(RequestsEnum.CREATION_REQUEST.getQuery()));
             return true;
         } catch (SQLException exception) {
             logger.log(Level.WARNING, "Can not connect to database!", exception);

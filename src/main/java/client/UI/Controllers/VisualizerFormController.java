@@ -1,5 +1,6 @@
 package client.UI.Controllers;
 
+import client.UI.resourcebundles.enums.MusicBandCreatingAndUpdatingFormElements;
 import client.backend.commands.Command;
 import client.backend.commands.UpdateCommand;
 import client.backend.core.Invoker;
@@ -81,7 +82,7 @@ public class VisualizerFormController {
 
     private final float DEFAULT_RADIUS_VALUE = 100;
 
-    private final int FRAMES_PER_SECOND = 60;
+    private final double FRAMES_PER_SECOND = 120;
 
     private final int SECOND = 1000;
 
@@ -98,6 +99,7 @@ public class VisualizerFormController {
     @FXML
     public void initialize() {
         musicBandPolygons = new ArrayList<>();
+        MainFormController.getCurrentLocale().addListener(change->updateLocale());
         canvas.setOnMouseClicked(this::onCanvasMouseClicked);
         canvas.setOnMouseMoved(this::onCanvasMouseMoved);
         canvasPane.getChildren().add(canvas);
@@ -109,6 +111,12 @@ public class VisualizerFormController {
                 }
         ));
         frameTimer.playFromStart();
+    }
+
+    private void updateLocale(){
+        coordinateXLabel.setText(MusicBandCreatingAndUpdatingFormElements.COORDINATE_X_LABEL.toString());
+        coordinateYLabel.setText(MusicBandCreatingAndUpdatingFormElements.COORDINATE_Y_LABEL.toString());
+        heightLabel.setText(MusicBandCreatingAndUpdatingFormElements.PERSON_HEIGHT_LABEL.toString());
     }
 
     private static void configureCanvas() {

@@ -24,9 +24,15 @@ public class CommandsAnswersRB_ru_RU extends ListResourceBundle {
                 {"updateCommandExecuted", "Объект был обновлен!"},
                 {"updateCommandNotExecuted", "Выбранный объект принадлежит другому пользователю!"},
                 {"countGreaterThanFrontManExecuted", "Музыкальных групп с солистом, выше чем %s: %s"},
-                {"countGreaterThanFrontManNotExecuted", "Введенный рост в неверном формате!(Ожидалось: float, не null)"},
+                {"countGreaterThanFrontManNotExecuted", "Введенный рост в неверном формате!(Ожидалось: float)"},
                 {"groupCountingByCoordinatesExecuted", "\nГруппа координат: %s\nКоличество элементов: %s\n"},
-                {"collectionIsEmpty", "Коллекция пустая!"}
+                {"collectionIsEmpty", "Коллекция пустая!"},
+                {"addIfMinCommandIdInWrongFormat", "Введен неверный формат ID!"},
+                {"addIfMinCommandIdIsNotMin", "Введенный ID не является минимальным!"},
+                {"infoCommandExecuted", "Информация о коллекции:" +
+                        "\n---Тип: Музыкальная группа" +
+                        "\n---Количество элементов: %s"},
+                {"idDoesNotExist", "Введенный идентификатор не существует!"}
         };
         return content;
     }

@@ -35,9 +35,8 @@ public class RemoveByIdCommand extends Command{
                 invoker.getPrinter().print(CommandsAnswers.REMOVE_BY_ID_COMMAND_EXECUTED.toString());
                 return true;
             }
-            invoker.getPrinter().print(CommandsAnswers.REMOVE_BY_ID_COMMAND_NOT_EXECUTED.toString());
-            return false;
         }
+        invoker.getPrinter().print(CommandsAnswers.REMOVE_BY_ID_COMMAND_NOT_EXECUTED.toString());
         return false;
     }
 }

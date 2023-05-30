@@ -17,7 +17,12 @@ public class RuntimeOutputRB_ru_RU extends ListResourceBundle {
                 {"connectionReconnected", "Соединение восстановлено!"},
                 {"connectionReconnectionFailed", "Не удалось восстановить соединение!"},
                 {"tcpSenderCanNOtSendRequest", "Не удалось отправить запрос!"},
-                {"canNonInitComponent", "Не удалось инициализировать программный компонент!"}
+                {"canNonInitComponent", "Не удалось инициализировать программный компонент!"},
+                {"anyFieldsDoesNotValid", "Некорректные значения в полях!"},
+                {"modelWasNotSelectedInTable", "Выберите модель в таблице."},
+                {"columnWasNotSelected", "Выберите столбец!"},
+                {"signWasNotSelected", "Выберите знак!"},
+                {"valueWasNotEntered", "Введите значение!"}
         };
         return content;
     }

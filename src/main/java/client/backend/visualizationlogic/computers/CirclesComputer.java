@@ -14,7 +14,7 @@ public class CirclesComputer {
         }
         if (radius1 + radius2 > distance) {
             if (Math.max(radius1, radius2) > distance){
-                return false;
+                return true;
             }
             return true;
         }
@@ -31,6 +31,7 @@ public class CirclesComputer {
     public Point2D[] calculateCirclePolygon(Point2D center, float radius, int pointsCount) {
         Point2D[] points = new Point2D[pointsCount];
         double alphaStep = (360d * Math.PI) / (pointsCount * 180);
+//        double alphaStep = 360/pointsCount;
         double alpha = 0;
 
         int counter = 0;

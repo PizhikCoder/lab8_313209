@@ -1,6 +1,10 @@
 package client.UI.resourcebundles.enums;
 
 
+import client.UI.Controllers.MainFormController;
+
+import java.util.ResourceBundle;
+
 public enum MainFormElements {
     SETTINGS_MENU("settingsMenu"),
     LOG_OUT_MENU_ITEM("logOutMenuItem"),
@@ -19,7 +23,8 @@ public enum MainFormElements {
     COUNT_GREATER_THAN_FRONT_MAN_BUTTON("countGreaterThanFrontManButton"),
     GROUP_COUNTING_BY_COORDINATES_BUTTON("groupCountingByCoordinatesButton"),
     CONTROLLERS_LABEL("controllersLabel"),
-    EXECUTE_SCRIPT_BUTTON("executeScriptButton");
+    EXECUTE_SCRIPT_BUTTON("executeScriptButton"),
+    VISUALIZE_BUTTON("visualizeButton");
     private final String bundleObjectName;
 
     MainFormElements (String bundleObjectName){
@@ -28,6 +33,7 @@ public enum MainFormElements {
 
     @Override
     public String toString() {
-        return bundleObjectName;
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("client.UI.resourcebundles.mainformbundles.MainFormRB", MainFormController.getCurrentLocale().get().getLocale());
+        return resourceBundle.getString(bundleObjectName);
     }
 }
