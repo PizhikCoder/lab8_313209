@@ -1,5 +1,6 @@
 package client.UI.Controllers;
 
+import client.UI.resourcebundles.enums.MusicBandCreatingAndUpdatingFormElements;
 import client.UI.resourcebundles.enums.RuntimeOutputs;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,10 +17,19 @@ public class AdditionalFormOfDataCollectionController {
     @FXML
     private TextField valueTextField;
 
+    @FXML
+    private Button cancelButton;
+
     private Stage currentStage;
 
     @FXML
     public void initialize(){
+        MainFormController.getCurrentLocale().addListener(change->updateLocale());
+        updateLocale();
+    }
+
+    private void updateLocale(){
+        cancelButton.setText(MusicBandCreatingAndUpdatingFormElements.CANCEL_BUTTON.toString());
     }
 
     @FXML

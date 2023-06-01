@@ -5,11 +5,17 @@ import javafx.beans.property.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.table.TableFilter;
 import shared.core.models.Country;
 import shared.core.models.MusicBand;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoUnit;
 
 public class TableColumnsInitializer {
     private TableView tableView;
@@ -29,8 +35,8 @@ public class TableColumnsInitializer {
         coordinateXColumn.setCellValueFactory(cellValue -> new SimpleIntegerProperty(cellValue.getValue().getCoordinates().getX()).asObject());
         TableColumn<MusicBand, Double> coordinateYColumn = new FixedNameTableColumn<>(ColumnNames.COORDINATES_Y_COLUMN);
         coordinateYColumn.setCellValueFactory(cellValue -> new SimpleDoubleProperty(cellValue.getValue().getCoordinates().getY()).asObject());
-        TableColumn<MusicBand, ZonedDateTime> creationDateColumn = new FixedNameTableColumn<>(ColumnNames.CREATION_DATE_COLUMN);
-        creationDateColumn.setCellValueFactory(cellValue -> new SimpleObjectProperty<>(cellValue.getValue().getCreationDate().withZoneSameInstant(MainFormController.getCurrentLocale().get().getZoneID())));
+        TableColumn<MusicBand, String> creationDateColumn = new FixedNameTableColumn<>(ColumnNames.CREATION_DATE_COLUMN);
+        creationDateColumn.setCellValueFactory(cellValue -> new SimpleObjectProperty<>(cellValue.getValue().getCreationDate().withZoneSameInstant(MainFormController.getCurrentLocale().get().getZoneID()).format(MainFormController.getCurrentLocale().get().getDateTimeFormatter())));
         TableColumn<MusicBand, Integer> numberOfParticipantsColumn = new FixedNameTableColumn<>( ColumnNames.NUMBER_OF_PARTICIPANTS_COLUMN);
         numberOfParticipantsColumn.setCellValueFactory(new PropertyValueFactory("numberOfParticipants"));
         TableColumn<MusicBand, String> genre = new FixedNameTableColumn<>(ColumnNames.GENRE_COLUMN);

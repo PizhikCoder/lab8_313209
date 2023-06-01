@@ -45,7 +45,7 @@ public class CirclesMover {
 
     private final int VELOCITY2_INDEX = 1;
 
-    private final int MOVES_PER_SECOND = 30;
+    private final int MOVES_PER_SECOND = 55;
 
     private final int SECOND = 1000;
 

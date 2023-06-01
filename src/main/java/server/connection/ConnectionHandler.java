@@ -256,10 +256,15 @@ public class ConnectionHandler implements IServerConnection {
             send(new AuthorizationRequest(null, null, BASE_ID_VALUE, false));
             return;
         }
-        invoker.getDatabaseHandler().addClient(registrationRequest.getLogin(), registrationRequest.getPassword());
-        int id = invoker.getDatabaseHandler().getClientID(registrationRequest.getLogin(), registrationRequest.getPassword());
-        send(new AuthorizationRequest(null, null, id, true));
-        send(new CollectionRequest(new ArrayList<>(invoker.getModelsManager().getModels())));
+        if (!registrationRequest.getLogin().isBlank() && !registrationRequest.getPassword().isBlank()){
+            invoker.getDatabaseHandler().addClient(registrationRequest.getLogin(), registrationRequest.getPassword());
+            int id = invoker.getDatabaseHandler().getClientID(registrationRequest.getLogin(), registrationRequest.getPassword());
+            send(new AuthorizationRequest(null, null, id, true));
+            send(new CollectionRequest(new ArrayList<>(invoker.getModelsManager().getModels())));
+        }
+        else {
+            send(new AuthorizationRequest(null, null, -1, false));
+        }
     }
 
     /**

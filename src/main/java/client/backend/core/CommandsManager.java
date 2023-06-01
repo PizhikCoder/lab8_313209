@@ -3,6 +3,7 @@ package client.backend.core;
 import client.UI.Controllers.MainFormController;
 import client.backend.commands.*;
 import client.backend.commands.adapters.AddCommandAdapter;
+import client.backend.commands.adapters.AddIfMinCommandAdapter;
 import client.backend.commands.adapters.UpdateCommandAdapter;
 import shared.core.models.MusicBand;
 
@@ -27,7 +28,7 @@ public class CommandsManager {
         commandsCollection.put("group_count_by_coordinates", new GroupCountingByCoordinatesCommand(MainFormController.getMainFormController().getTableViewHandler().getSortedList().toArray(MusicBand[]::new)));
         commandsCollection.put("remove_by_id", new RemoveByIdCommand(Invoker.getInstance()));
         commandsCollection.put("update", new UpdateCommandAdapter());
-        commandsCollection.put("add_if_min", new AddCommandAdapter());
+        commandsCollection.put("add_if_min", new AddIfMinCommandAdapter());
     }
 
     public Optional<Command> findCommand(String command){

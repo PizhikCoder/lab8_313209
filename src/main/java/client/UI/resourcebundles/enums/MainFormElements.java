@@ -9,7 +9,6 @@ public enum MainFormElements {
     SETTINGS_MENU("settingsMenu"),
     LOG_OUT_MENU_ITEM("logOutMenuItem"),
     LANGUAGE_MENU_ITEM("languageMenuItem"),
-    HELP_MENU("helpMenu"),
     INFO_MENU("infoMenu"),
     CREATE_FILTER_BUTTON("createFilterButton"),
     REMOVE_FILTERS_BUTTON("removeFiltersButton"),

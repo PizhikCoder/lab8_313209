@@ -19,7 +19,7 @@ public class PostgresDataBase implements IDatabase {
 
     private final int DATABASE_WAITING_TIME = 3;
 
-    private final int SEMAPHORE_PLACES_COUNT = 2;
+    private final int SEMAPHORE_PLACES_COUNT = 5;
 
     private final String hostName;
 
@@ -30,6 +30,8 @@ public class PostgresDataBase implements IDatabase {
     private Connection connection;
 
     private final Semaphore semaphore;
+
+    private final int BD_REQUEST_DELAY = 5;
 
     public PostgresDataBase(String hostName, String pass, String url) {
         this.hostName = hostName;
@@ -89,7 +91,10 @@ public class PostgresDataBase implements IDatabase {
             return null;
         }
         finally {
-            semaphore.release();
+            try {
+                Thread.sleep(BD_REQUEST_DELAY);
+                semaphore.release();
+            } catch (InterruptedException e) {}
         }
     }
 

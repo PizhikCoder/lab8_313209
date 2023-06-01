@@ -28,6 +28,7 @@ public class MainApplication extends Application {
     private static final int MAX_PORT_VALUE = 1023;
 
     private static final int PORT_INDEX = 0;
+
     private static Stage primaryStage;
 
     @Override
@@ -48,6 +49,7 @@ public class MainApplication extends Application {
         if (createConnection(port)) {
             launch();
         }
+        Platform.exit();
     }
 
     private static boolean createConnection(int port) {
@@ -62,18 +64,9 @@ public class MainApplication extends Application {
             serverListenerThread.start();
             return true;
         } catch (ConnectionException connectionException) {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(RuntimeOutputs.CONNECTION_COULD_NOT_BE_ESTABLISHED.toString());
-                alert.setContentText(connectionException.getMessage());
-                alert.show();
-            });
+            System.out.println(RuntimeOutputs.CONNECTION_COULD_NOT_BE_ESTABLISHED);
         } catch (IOException ioException) {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
-                alert.show();
-            });
+            System.out.println(RuntimeOutputs.CAN_NOT_INIT_COMPONENT);
         }
         return false;
     }

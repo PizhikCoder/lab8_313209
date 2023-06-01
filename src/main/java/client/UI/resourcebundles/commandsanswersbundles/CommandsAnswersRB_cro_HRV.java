@@ -25,7 +25,7 @@ public class CommandsAnswersRB_cro_HRV extends ListResourceBundle {
                 {"updateCommandExecuted", "Objekt je ažuriran!"},
                 {"updateCommandNotExecuted", "Odabrani objekt pripada drugom korisniku!"},
                 {"countGreaterThanFrontManExecuted", "Glazbeni sastavi s vođom visokim više od %s: %s"},
-                {"countGreaterThanFrontManNotExecuted", "Unesena visina je u pogrešnom formatu! (Očekivano: float)"},
+                {"countGreaterThanFrontManNotExecuted", "Unesena visina je u pogrešnom formatu! (Očekivano: 0<float<=240)"},
                 {"groupCountingByCoordinatesExecuted", "\nGrupa koordinata: %s\nBroj elemenata: %s\n"},
                 {"collectionIsEmpty", "Kolekcija je prazna!"},
                 {"addIfMinCommandIdInWrongFormat", "Uneseni ID je u pogrešnom formatu!"},

@@ -1,6 +1,8 @@
 package client.UI.Controllers;
 
+import client.MainApplication;
 import client.UI.resourcebundles.enums.MusicBandCreatingAndUpdatingFormElements;
+import client.UI.resourcebundles.enums.VisualisationFirmElements;
 import client.backend.commands.Command;
 import client.backend.commands.UpdateCommand;
 import client.backend.core.Invoker;
@@ -14,6 +16,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
@@ -35,6 +38,9 @@ public class VisualizerFormController {
     private Label coordinateXLabel;
 
     @FXML
+    private Scene mainScene;
+
+    @FXML
     private Label coordinateYLabel;
 
     @FXML
@@ -48,6 +54,9 @@ public class VisualizerFormController {
 
     @FXML
     private Slider heightSlider;
+
+    @FXML
+    private Button backToTableButton;
 
     @FXML
     private Pane canvasPane;
@@ -82,7 +91,7 @@ public class VisualizerFormController {
 
     private final float DEFAULT_RADIUS_VALUE = 100;
 
-    private final double FRAMES_PER_SECOND = 120;
+    private final double FRAMES_PER_SECOND = 60;
 
     private final int SECOND = 1000;
 
@@ -100,6 +109,7 @@ public class VisualizerFormController {
     public void initialize() {
         musicBandPolygons = new ArrayList<>();
         MainFormController.getCurrentLocale().addListener(change->updateLocale());
+        updateLocale();
         canvas.setOnMouseClicked(this::onCanvasMouseClicked);
         canvas.setOnMouseMoved(this::onCanvasMouseMoved);
         canvasPane.getChildren().add(canvas);
@@ -114,9 +124,10 @@ public class VisualizerFormController {
     }
 
     private void updateLocale(){
-        coordinateXLabel.setText(MusicBandCreatingAndUpdatingFormElements.COORDINATE_X_LABEL.toString());
-        coordinateYLabel.setText(MusicBandCreatingAndUpdatingFormElements.COORDINATE_Y_LABEL.toString());
-        heightLabel.setText(MusicBandCreatingAndUpdatingFormElements.PERSON_HEIGHT_LABEL.toString());
+        coordinateXLabel.setText(VisualisationFirmElements.COORDINATE_X_LABEL.toString());
+        coordinateYLabel.setText(VisualisationFirmElements.COORDINATE_Y_LABEL.toString());
+        heightLabel.setText(VisualisationFirmElements.PERSON_HEIGHT_LABEL.toString());
+        backToTableButton.setText(VisualisationFirmElements.BACK_TO_THE_TABLE_BUTTON.toString());
     }
 
     private static void configureCanvas() {
@@ -192,7 +203,7 @@ public class VisualizerFormController {
         graphicsContext.strokePolygon(Arrays.stream(points).mapToDouble(Point2D::getX).toArray(), Arrays.stream(points).mapToDouble(Point2D::getY).toArray(), points.length);
     }
 
-    public void clearResources() {
+    private void clearResources() {
         canvasPane.getChildren().clear();
         frameTimer.stop();
     }
@@ -224,6 +235,13 @@ public class VisualizerFormController {
             return;
         }
         selectPolygon(musicBandPolygon);
+    }
+
+    @FXML
+    protected void onBackToTableButtonPressed(ActionEvent actionEvent){
+        MainApplication.getPrimaryStage().setResizable(true);
+        MainApplication.getPrimaryStage().setScene(MainFormController.getMainFormController().getPrimaryScene());
+        clearResources();
     }
 
     @FXML
@@ -287,4 +305,5 @@ public class VisualizerFormController {
         canvasXLabel.setText(newX.toString());
         canvasYLabel.setText(newY.toString());
     }
+
 }

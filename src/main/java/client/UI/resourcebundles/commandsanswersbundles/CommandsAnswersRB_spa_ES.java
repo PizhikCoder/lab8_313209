@@ -25,7 +25,7 @@ public class CommandsAnswersRB_spa_ES extends ListResourceBundle {
                 {"updateCommandExecuted", "¡Objeto actualizado!"},
                 {"updateCommandNotExecuted", "¡El objeto seleccionado pertenece a otro usuario!"},
                 {"countGreaterThanFrontManExecuted", "Bandas de música con frontman más alto que %s: %s"},
-                {"countGreaterThanFrontManNotExecuted", "Altura ingresada en formato incorrecto. (Se espera un número flotante)"},
+                {"countGreaterThanFrontManNotExecuted", "Altura ingresada en formato incorrecto. (Se espera un 0<número flotante<=240)"},
                 {"groupCountingByCoordinatesExecuted", "\nGrupo de coordenadas: %s\nCantidad de elementos: %s\n"},
                 {"collectionIsEmpty", "La colección está vacía."},
                 {"addIfMinCommandIdInWrongFormat", "¡ID ingresado en un formato incorrecto!"},

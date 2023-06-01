@@ -6,6 +6,7 @@ import client.backend.core.Exceptions.UnknownCommandException;
 import shared.interfaces.IPrinter;
 
 import java.io.*;
+import java.util.concurrent.ExecutionException;
 
 public class FileListener {
 
@@ -49,12 +50,13 @@ public class FileListener {
                 invoker.invokeCommand(command);
             }
             else {
-                invoker.invokeCommand(command, commandLineArray[1]);
+                invoker.invokeCommand(command, commandLineArray[1]).get();
             }
         }
         catch (UnknownCommandException unknownCommandException){
             printer.print(unknownCommandException.getMessage());
         }
+        catch (ExecutionException | InterruptedException e) {}
     }
 
     private void initReader() throws FileNotFoundException {

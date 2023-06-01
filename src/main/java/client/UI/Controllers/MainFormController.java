@@ -9,7 +9,10 @@ import client.backend.commands.*;
 import client.backend.core.Invoker;
 import client.backend.core.MusicBandFieldsValidators;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import org.controlsfx.control.Notifications;
 import shared.commands.enums.DataField;
@@ -41,8 +44,7 @@ public class MainFormController {
     @FXML
     private Menu settingsMenu;
 
-    @FXML
-    private Menu helpMenu;
+    private Scene primaryScene;
 
     @FXML
     private MenuItem languageMenuItem;
@@ -159,7 +161,6 @@ public class MainFormController {
         groupCountingByCoordinatesButton.setText(MainFormElements.GROUP_COUNTING_BY_COORDINATES_BUTTON.toString());
         controllersLabel.setText(MainFormElements.CONTROLLERS_LABEL.toString());
         infoMenu.setText(MainFormElements.INFO_MENU.toString());
-        helpMenu.setText(MainFormElements.HELP_MENU.toString());
         settingsMenu.setText(MainFormElements.SETTINGS_MENU.toString());
         logOutMenuItem.setText(MainFormElements.LOG_OUT_MENU_ITEM.toString());
         languageMenuItem.setText(MainFormElements.LANGUAGE_MENU_ITEM.toString());
@@ -220,6 +221,9 @@ public class MainFormController {
             Command command = new RemoveByIdCommand(Invoker.getInstance());
             Invoker.getInstance().invokeCommand(command, value);
         }
+        else {
+            Notifications.create().position(Pos.TOP_CENTER).text(CommandsAnswers.ADD_IF_MIN_COMMAND_ID_IN_WRONG_FORMAT.toString()).show();
+        }
     }
 
     @FXML
@@ -258,7 +262,7 @@ public class MainFormController {
                 Command command = new FilterLessThanFrontManCommand(filtersHBox);
                 Invoker.getInstance().invokeCommand(command, value);
             } else {
-                Notifications.create().text(CommandsAnswers.COUNT_GREATER_THAN_FRONT_MAN_NOT_EXECUTED.toString()).show();
+                Notifications.create().text(CommandsAnswers.COUNT_GREATER_THAN_FRONT_MAN_NOT_EXECUTED.toString()).position(Pos.TOP_CENTER).show();
             }
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -343,18 +347,14 @@ public class MainFormController {
     @FXML
     protected void onVisualizationButtonPressed(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();
-        Stage stage = new Stage();
+        Stage stage = MainApplication.getPrimaryStage();
         try {
             button.setDisable(true);
             FXMLLoader fxmlLoader = new FXMLLoader(VisualizerFormController.class.getResource("VisualizerForm.fxml"));
             Parent parent = fxmlLoader.load();
             Scene scene = new Scene(parent, VISUALIZATION_FORM_WIDTH, VISUALIZATION_FORM_HEIGHT);
-            stage.setScene(scene);
             stage.setResizable(false);
-            stage.showAndWait();
-            stage.close();
-            ((VisualizerFormController) fxmlLoader.getController()).clearResources();
-            System.gc();
+            stage.setScene(scene);
 
         } catch (IOException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -526,5 +526,13 @@ public class MainFormController {
 
     public ObservableList<MusicBand> getModelsCollection() {
         return modelsCollection;
+    }
+
+    public void setPrimaryScene(Scene scene){
+        this.primaryScene = scene;
+    }
+
+    public Scene getPrimaryScene(){
+        return primaryScene;
     }
 }

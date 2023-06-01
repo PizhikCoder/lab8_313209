@@ -1,9 +1,11 @@
 package client.backend.visualizationlogic.computers;
 
 
+import client.UI.Controllers.MainFormController;
 import client.backend.visualizationlogic.entities.StraightLineEquation;
 import client.backend.visualizationlogic.exceptions.UnsolvableCollisionCaseException;
 import javafx.geometry.Point2D;
+import javafx.scene.Scene;
 
 public class CirclesComputer {
 

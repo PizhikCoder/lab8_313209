@@ -102,6 +102,7 @@ public class AuthorizationFormController {
                 MainFormController mainFormController = fxmlLoader.getController();
                 mainFormController.getUserMenu().setText(ClientInfo.getLogin() + "   ID:   " + ClientInfo.getUserId());
                 Scene scene = new Scene(parent, SCENE_WIDTH, SCENE_HEIGHT);
+                mainFormController.setPrimaryScene(scene);
                 MainApplication.getPrimaryStage().setScene(scene);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -122,14 +123,11 @@ public class AuthorizationFormController {
                 MainFormController mainFormController = fxmlLoader.getController();
                 mainFormController.getUserMenu().setText(ClientInfo.getLogin() + "   ID:   " + ClientInfo.getUserId());
                 Scene scene = new Scene(parent, SCENE_WIDTH, SCENE_HEIGHT);
+                mainFormController.setPrimaryScene(scene);
                 MainApplication.getPrimaryStage().setScene(scene);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-        else {
-            IPrinter printer = Invoker.getInstance().getPrinter();
-            printer.print(CommandsAnswers.SIGN_UP_COMMAND_NOT_EXECUTED.toString());
         }
         button.setDisable(false);
     }

@@ -8,6 +8,7 @@ import client.backend.commands.AddIfMinCommand;
 import client.backend.commands.Command;
 import client.backend.core.Invoker;
 import client.backend.core.MusicBandFieldsValidators;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -21,10 +22,11 @@ import shared.core.models.MusicBand;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 
 public class AddIfMinCommandAdapter extends Command {
-
+    private volatile CountDownLatch countDownLatch = new CountDownLatch(1);
 
     private final int EXPECTED_ARGUMENTS_COUNT = 1;
 
@@ -69,15 +71,20 @@ public class AddIfMinCommandAdapter extends Command {
         }
     }
 
-    private MusicBandCreatingAndUpdatingFormController initCreatingForm() throws IOException {
+    private MusicBandCreatingAndUpdatingFormController initCreatingForm() throws IOException, InterruptedException {
         FXMLLoader fxmlLoader = new FXMLLoader(MusicBandCreatingAndUpdatingFormController.class.getResource("MusicBandCreatingForm.fxml"));
         Parent node = fxmlLoader.load();
         Scene scene = new Scene(node, MUSIC_BAND_CREATING_AND_UPDATING_FORM_WIDTH, MUSIC_BAND_CREATING_AND_UPDATING_FORM_HEIGHT);
-        Stage stage = new Stage();
         MusicBandCreatingAndUpdatingFormController musicBandCreatingAndUpdatingFormController = fxmlLoader.getController();
-        musicBandCreatingAndUpdatingFormController.setCurrentStage(stage);
-        stage.setScene(scene);
-        stage.showAndWait();
+        Platform.runLater(()->{
+            Stage stage = new Stage();
+            musicBandCreatingAndUpdatingFormController.setCurrentStage(stage);
+            stage.setScene(scene);
+            stage.showAndWait();
+            countDownLatch.countDown();
+            countDownLatch = new CountDownLatch(1);
+        });
+        countDownLatch.await();
         return musicBandCreatingAndUpdatingFormController;
     }
 

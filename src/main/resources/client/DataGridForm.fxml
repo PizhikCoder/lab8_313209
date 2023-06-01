@@ -38,7 +38,6 @@
               <MenuItem fx:id="languageMenuItem" mnemonicParsing="false" onAction="#onLanguageMenuItemPressed" text="Language" />
             </items>
           </Menu>
-          <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help" />
         </menus>
       </MenuBar>
       <GridPane GridPane.rowIndex="1">
@@ -101,16 +100,16 @@
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
             <Label fx:id="controllersLabel" text="Controllers" />
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonPressed" prefHeight="26.0" prefWidth="129.0" text="add" wrapText="true">
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonPressed" prefHeight="26.0" prefWidth="129.0" text="add" textAlignment="CENTER" wrapText="true">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="addIfMinButton" mnemonicParsing="false" onAction="#onAddIfMinButtonPressed" prefHeight="26.0" prefWidth="129.0" text="add if min" wrapText="true" />
-            <Button fx:id="updateButton" mnemonicParsing="false" onAction="#onUpdateButtonPressed" prefHeight="26.0" prefWidth="129.0" text="update" wrapText="true" />
-            <Button fx:id="removeButton" mnemonicParsing="false" onAction="#onRemoveButtonPressed" prefHeight="26.0" prefWidth="129.0" text="remove" wrapText="true" />
-            <Button fx:id="removeByIdButton" mnemonicParsing="false" onAction="#onRemoveByIdButtonPressed" prefHeight="26.0" prefWidth="129.0" text="remove by id" wrapText="true" />
-            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClearButtonPressed" prefHeight="26.0" prefWidth="129.0" text="clear" wrapText="true" />
+            <Button fx:id="addIfMinButton" minHeight="26.0" minWidth="129.0" mnemonicParsing="false" onAction="#onAddIfMinButtonPressed" prefWidth="129.0" text="add if min" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="updateButton" mnemonicParsing="false" onAction="#onUpdateButtonPressed" prefHeight="26.0" prefWidth="129.0" text="update" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="removeButton" mnemonicParsing="false" onAction="#onRemoveButtonPressed" prefHeight="26.0" prefWidth="129.0" text="remove" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="removeByIdButton" mnemonicParsing="false" onAction="#onRemoveByIdButtonPressed" prefHeight="26.0" prefWidth="129.0" text="remove by id" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClearButtonPressed" prefHeight="26.0" prefWidth="129.0" text="clear" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="filterLessThanFrontManButton" mnemonicParsing="false" onAction="#onFilterLessThanFrontManButtonPressed" prefWidth="129.0" text="Filter less than frontman" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="countGreaterThanFrontManButton" mnemonicParsing="false" onAction="#onCountGreaterThanFrontManButtonPressed" prefWidth="129.0" text="Count greater than frontman" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="groupCountingByCoordinatesButton" mnemonicParsing="false" onAction="#onGroupCountingByCoordinatesButtonPressed" prefWidth="129.0" text="Group counting by coordinates" textAlignment="CENTER" wrapText="true" />

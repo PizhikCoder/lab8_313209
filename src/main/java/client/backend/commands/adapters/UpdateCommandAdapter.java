@@ -18,6 +18,7 @@ import shared.core.exceptions.CommandParamsException;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 
 public class UpdateCommandAdapter extends Command {
@@ -29,6 +30,8 @@ public class UpdateCommandAdapter extends Command {
     private final int MUSIC_BAND_CREATING_AND_UPDATING_FORM_HEIGHT = 600;
 
     private final int MUSIC_BAND_CREATING_AND_UPDATING_FORM_WIDTH = 400;
+
+    private volatile CountDownLatch countDownLatch = new CountDownLatch(1);
 
     @Override
     public boolean execute(String... args) throws CommandParamsException {
@@ -54,15 +57,20 @@ public class UpdateCommandAdapter extends Command {
         return false;
     }
 
-    private MusicBandCreatingAndUpdatingFormController initCreatingForm() throws IOException {
+    private MusicBandCreatingAndUpdatingFormController initCreatingForm() throws IOException, InterruptedException {
         FXMLLoader fxmlLoader = new FXMLLoader(MusicBandCreatingAndUpdatingFormController.class.getResource("MusicBandCreatingForm.fxml"));
         Parent node = fxmlLoader.load();
         Scene scene = new Scene(node, MUSIC_BAND_CREATING_AND_UPDATING_FORM_WIDTH, MUSIC_BAND_CREATING_AND_UPDATING_FORM_HEIGHT);
-        Stage stage = new Stage();
         MusicBandCreatingAndUpdatingFormController musicBandCreatingAndUpdatingFormController = fxmlLoader.getController();
-        musicBandCreatingAndUpdatingFormController.setCurrentStage(stage);
-        stage.setScene(scene);
-        stage.showAndWait();
+        Platform.runLater(()->{
+            Stage stage = new Stage();
+            musicBandCreatingAndUpdatingFormController.setCurrentStage(stage);
+            stage.setScene(scene);
+            stage.showAndWait();
+            countDownLatch.countDown();
+            countDownLatch = new CountDownLatch(1);
+        });
+        countDownLatch.await();
         return musicBandCreatingAndUpdatingFormController;
     }
 }
