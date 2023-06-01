@@ -95,12 +95,7 @@ public class ModelsValidator {
      * @return validating result.
      */
     public static boolean frontManValueCheck(Person frontMan){
-        if (nameValueCheck(frontMan.getName()) && personHeightValueCheck(frontMan.getHeight()) && nationalityValueCheck(frontMan.getNationality())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return nameValueCheck(frontMan.getName()) && personHeightValueCheck(frontMan.getHeight()) && nationalityValueCheck(frontMan.getNationality());
     }
 
 
@@ -110,12 +105,7 @@ public class ModelsValidator {
      * @return validating result.
      */
     public static boolean coordinateYCheck(double y){
-        if (y>Y_LIMIT && y<0){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return !(y>Y_LIMIT || y<0);
     }
 
     /**
@@ -124,12 +114,7 @@ public class ModelsValidator {
      * @return validating result.
      */
     public static boolean coordinateXCheck(double x){
-        if (x>X_LIMIT && x<0){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return !(x>X_LIMIT || x<0);
     }
 
     /**
@@ -138,12 +123,7 @@ public class ModelsValidator {
      * @return validating result.
      */
     public static boolean nameValueCheck(String name){
-        if (name == null || name.isBlank()){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !(name == null || name.isBlank());
     }
 
     /**
@@ -152,12 +132,7 @@ public class ModelsValidator {
      * @return validating result.
      */
     public static boolean numberOfParticipantsValueCheck(int numberOfParticipants){
-        if (numberOfParticipants<=0){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !(numberOfParticipants<=0);
     }
 
     /**
@@ -166,12 +141,7 @@ public class ModelsValidator {
      * @return validating result.
      */
     public static boolean personHeightValueCheck(Float height){
-        if (height != null && height<=0){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !(height != null && height<=0);
     }
 
     /**
@@ -181,12 +151,7 @@ public class ModelsValidator {
      */
 
     public static boolean nationalityValueCheck(Country country){
-        if (country == null){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !(country == null);
     }
 
 
