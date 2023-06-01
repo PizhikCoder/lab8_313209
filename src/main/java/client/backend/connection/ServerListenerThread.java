@@ -69,7 +69,9 @@ public class ServerListenerThread extends Thread{
                         handleAuthorizationRequest(response);
                         condition.await();
                     }
-                    catch (InterruptedException interruptedException){}
+                    catch (InterruptedException interruptedException){
+                        System.err.println("Authorization thread-waiter interrupted!");
+                    }
                     finally {
                         locker.unlock();
                     }

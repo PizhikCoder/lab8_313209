@@ -20,11 +20,6 @@ public class PointsComputer {
     public boolean isPointAndCenterTogether(Point2D center, Point2D point, StraightLineEquation controlLine){
         double centerPos = controlLine.getA() * center.getX() + controlLine.getB() * center.getY() + controlLine.getC();
         double pointPos = controlLine.getA() * point.getX() + controlLine.getB() * point.getY() + controlLine.getC();
-        if ( (centerPos > 0 && pointPos >= 0) || (centerPos < 0 && pointPos <= 0) ){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (centerPos > 0 && pointPos >= 0) || (centerPos < 0 && pointPos <= 0);
     }
 }

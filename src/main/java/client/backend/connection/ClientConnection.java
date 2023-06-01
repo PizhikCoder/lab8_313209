@@ -104,6 +104,7 @@ public class ClientConnection implements IClientConnection {
                 }
             }
             catch (ConnectionException | InterruptedException exception){
+                System.err.println("Server listener thread was interrupted while waiting for reconnection!");
             }
         }
         invoker.getPrinter().print(RuntimeOutputs.CONNECTION_RECONNECTION_FAILED.toString());

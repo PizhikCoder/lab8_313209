@@ -23,12 +23,11 @@ public class MusicBandFieldsValidators {
     public static boolean bandIdValidate(String value){
         try{
             long id  = Long.parseLong(value);
-            if (id>0){
-                return true;
-            }
+            return id > 0;
         }
-        catch (NumberFormatException numberFormatException){}
-        return false;
+        catch (NumberFormatException numberFormatException){
+            return false;
+        }
     }
 
     public static boolean coordinateXValidate(TextField textField, MusicBandCreatingAndUpdatingFormController controller){

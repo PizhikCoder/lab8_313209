@@ -38,7 +38,9 @@ public class AddCommandAdapter extends Command {
                 alert.setContentText("Can not load music band creator form!");
                 alert.show();
             });
-        } catch (ExecutionException | InterruptedException e) {}
+        } catch (ExecutionException | InterruptedException e) {
+            System.err.println("Main thread was interrupted!");
+        }
         return false;
     }
 

@@ -56,7 +56,9 @@ public class FileListener {
         catch (UnknownCommandException unknownCommandException){
             printer.print(unknownCommandException.getMessage());
         }
-        catch (ExecutionException | InterruptedException e) {}
+        catch (ExecutionException | InterruptedException e) {
+            System.err.println("Command thread interrupted while script executing!");
+        }
     }
 
     private void initReader() throws FileNotFoundException {

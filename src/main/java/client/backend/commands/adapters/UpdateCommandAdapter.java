@@ -53,7 +53,9 @@ public class UpdateCommandAdapter extends Command {
                 alert.setContentText(RuntimeOutputs.CAN_NOT_INIT_COMPONENT.toString());
                 alert.show();
             });
-        } catch (ExecutionException | InterruptedException e) {}
+        } catch (ExecutionException | InterruptedException e) {
+            System.err.println("Main thread was interrupted!");
+        }
         return false;
     }
 

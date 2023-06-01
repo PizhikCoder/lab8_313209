@@ -94,7 +94,9 @@ public class PostgresDataBase implements IDatabase {
             try {
                 Thread.sleep(BD_REQUEST_DELAY);
                 semaphore.release();
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+                logger.log(Level.WARNING, "Thread was interrupted while sending query to database.");
+            }
         }
     }
 

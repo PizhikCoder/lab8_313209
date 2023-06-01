@@ -43,7 +43,9 @@ public class PolygonsFacade {
             try {
                 future1.get();
                 future2.get();
-            } catch (InterruptedException | ExecutionException e) {}
+            } catch (InterruptedException | ExecutionException e) {
+                System.err.println("Points calculating thread was interrupted!");
+            }
         }
         polygon1.updatePoints(points1);
         polygon2.updatePoints(points2);
